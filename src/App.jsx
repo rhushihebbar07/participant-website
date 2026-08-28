@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import ArrivalCheckin from './ArrivalCheckin'
 import ParticipantChecklist from './ParticipantChecklist'
+import FAQSearch from './FAQSearch'
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -53,7 +55,10 @@ function App() {
         </div>
       </div>
 
-      {/* Atmospheric depth */}
+      {/* =====================================================
+          ATMOSPHERIC DEPTH
+      ====================================================== */}
+
       <div
         className="depth-overlay"
         aria-hidden="true"
@@ -179,7 +184,7 @@ function App() {
         </div>
 
         {/* =================================================
-            DIVIDER
+            HEADER DIVIDER
         ================================================== */}
 
         <div className="header-divider" />
@@ -234,7 +239,7 @@ function App() {
       </header>
 
       {/* =====================================================
-          TEMPORARY HERO
+          HERO
       ====================================================== */}
 
       <main
@@ -272,10 +277,22 @@ function App() {
       </main>
 
       {/* =====================================================
+          ARRIVAL & CHECK-IN GUIDE
+      ====================================================== */}
+
+      <ArrivalCheckin />
+
+      {/* =====================================================
           PARTICIPANT CHECKLIST HUB
       ====================================================== */}
 
       <ParticipantChecklist />
+
+      {/* =====================================================
+          INSTANT FAQ SEARCH
+      ====================================================== */}
+
+      <FAQSearch />
 
     </div>
   )

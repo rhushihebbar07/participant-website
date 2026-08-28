@@ -1,0 +1,995 @@
+/* =========================================================
+   SEMAPHORE — ARRIVAL & CHECK-IN
+   Underwater Glass Interface
+========================================================= */
+
+.arrival-section {
+  position: relative;
+  z-index: 2;
+
+  min-height: 100vh;
+  padding: 130px clamp(18px, 5vw, 80px) 110px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 9, 18, 0),
+      rgba(1, 14, 26, 0.45) 25%,
+      rgba(0, 7, 17, 0.78)
+    );
+}
+
+
+/* =========================================================
+   AMBIENT LIGHT
+========================================================= */
+
+.arrival-glow {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(90px);
+}
+
+.arrival-glow-one {
+  top: 5%;
+  right: -300px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(48, 225, 255, 0.17),
+      transparent 68%
+    );
+
+  animation:
+    arrivalGlowOne 12s ease-in-out infinite alternate;
+}
+
+.arrival-glow-two {
+  left: -350px;
+  bottom: -180px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(19, 153, 190, 0.12),
+      transparent 68%
+    );
+
+  animation:
+    arrivalGlowTwo 15s ease-in-out infinite alternate;
+}
+
+@keyframes arrivalGlowOne {
+  from {
+    transform:
+      translateY(25px)
+      scale(.85);
+    opacity: .45;
+  }
+
+  to {
+    transform:
+      translateY(-25px)
+      scale(1.12);
+    opacity: .8;
+  }
+}
+
+@keyframes arrivalGlowTwo {
+  from {
+    transform:
+      translate(20px, 20px)
+      scale(.9);
+  }
+
+  to {
+    transform:
+      translate(-20px, -20px)
+      scale(1.12);
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.arrival-container {
+  position: relative;
+
+  width: min(1450px, 100%);
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.arrival-heading {
+  max-width: 760px;
+
+  margin-bottom: 58px;
+}
+
+.arrival-eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 23px;
+
+  color: #57eaff;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: .26em;
+
+  animation:
+    arrivalFadeUp .8s ease both;
+}
+
+.arrival-line {
+  width: 36px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(82, 230, 255, .75)
+    );
+}
+
+.arrival-line:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(82, 230, 255, .75),
+      transparent
+    );
+}
+
+.arrival-heading h2 {
+  margin: 0;
+
+  color:
+    rgba(236, 253, 255, .96);
+
+  font-size:
+    clamp(44px, 6vw, 80px);
+
+  line-height: .96;
+
+  font-weight: 500;
+
+  letter-spacing: -.065em;
+
+  animation:
+    arrivalFadeUp .9s .08s ease both;
+}
+
+.arrival-heading h2 span {
+  color: #55eaff;
+
+  text-shadow:
+    0 0 30px
+    rgba(67, 229, 255, .22);
+}
+
+.arrival-heading p {
+  max-width: 590px;
+
+  margin:
+    25px 0 0;
+
+  color:
+    rgba(181, 216, 224, .61);
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  animation:
+    arrivalFadeUp 1s .16s ease both;
+}
+
+@keyframes arrivalFadeUp {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   ARRIVAL FLOW
+========================================================= */
+
+.arrival-flow {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+
+/* =========================================================
+   CONNECTING LINE
+========================================================= */
+
+.flow-line {
+  position: absolute;
+
+  top: 48px;
+  left: 9%;
+  right: 9%;
+
+  height: 1px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(73, 220, 247, .24),
+      rgba(73, 220, 247, .38),
+      rgba(73, 220, 247, .24),
+      transparent
+    );
+
+  z-index: 0;
+}
+
+.flow-line::after {
+  content: '';
+
+  position: absolute;
+
+  top: -1px;
+  left: -10%;
+
+  width: 15%;
+  height: 3px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(113, 239, 255, .8),
+      transparent
+    );
+
+  filter: blur(2px);
+
+  animation:
+    flowScanner 5s linear infinite;
+}
+
+@keyframes flowScanner {
+  from {
+    transform:
+      translateX(0);
+  }
+
+  to {
+    transform:
+      translateX(800%);
+  }
+}
+
+
+/* =========================================================
+   ARRIVAL CARD
+========================================================= */
+
+.arrival-card {
+  position: relative;
+
+  z-index: 1;
+
+  min-height: 320px;
+
+  padding: 23px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(75, 218, 247, .14);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7, 52, 71, .50),
+      rgba(2, 18, 31, .75)
+    );
+
+  box-shadow:
+    inset 0 1px
+      rgba(226, 253, 255, .065),
+    inset 0 -1px
+      rgba(0, 0, 0, .16),
+    0 22px 60px
+      rgba(0, 0, 0, .20);
+
+  backdrop-filter:
+    blur(19px)
+    saturate(135%);
+
+  -webkit-backdrop-filter:
+    blur(19px)
+    saturate(135%);
+
+  animation:
+    arrivalCardIn .8s ease both;
+
+  transition:
+    transform .45s cubic-bezier(.22,1,.36,1),
+    border-color .35s ease,
+    box-shadow .35s ease;
+}
+
+.arrival-card:nth-child(2) {
+  animation-delay: .05s;
+}
+
+.arrival-card:nth-child(3) {
+  animation-delay: .12s;
+}
+
+.arrival-card:nth-child(4) {
+  animation-delay: .19s;
+}
+
+.arrival-card:nth-child(5) {
+  animation-delay: .26s;
+}
+
+@keyframes arrivalCardIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+.arrival-card:hover {
+  transform:
+    translateY(-8px);
+
+  border-color:
+    rgba(78, 229, 255, .35);
+
+  box-shadow:
+    inset 0 1px
+      rgba(226, 253, 255, .1),
+    0 30px 70px
+      rgba(0, 0, 0, .29),
+    0 0 35px
+      rgba(38, 214, 244, .07);
+}
+
+.arrival-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 12%;
+
+  width: 76%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(112, 239, 255, .52),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.card-number {
+  position: absolute;
+
+  top: 21px;
+  right: 22px;
+
+  color:
+    rgba(114, 228, 244, .22);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: .08em;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-top: 8px;
+  margin-bottom: 58px;
+
+  border:
+    1px solid
+    rgba(75, 226, 251, .23);
+
+  border-radius: 15px;
+
+  color: #67edff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(57, 219, 247, .12),
+      rgba(4, 65, 88, .12)
+    );
+
+  box-shadow:
+    inset 0 1px
+      rgba(255,255,255,.08),
+    0 0 25px
+      rgba(48, 221, 251, .05);
+
+  font-size: 20px;
+
+  transition:
+    transform .4s ease,
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.arrival-card:hover .card-icon {
+  transform:
+    translateY(-4px)
+    rotate(-4deg);
+
+  border-color:
+    rgba(89, 235, 255, .48);
+
+  box-shadow:
+    0 0 28px
+      rgba(54, 226, 255, .14),
+    inset 0 1px
+      rgba(255,255,255,.12);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-content {
+  position: relative;
+
+  z-index: 2;
+}
+
+.card-content h3 {
+  margin:
+    0 0 11px;
+
+  color:
+    rgba(232, 251, 255, .92);
+
+  font-size: 17px;
+
+  line-height: 1.3;
+
+  font-weight: 600;
+
+  letter-spacing: -.025em;
+}
+
+.card-content p {
+  margin: 0;
+
+  color:
+    rgba(174, 211, 219, .56);
+
+  font-size: 11px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   CARD WATER GLOW
+========================================================= */
+
+.card-water-glow {
+  position: absolute;
+
+  right: -100px;
+  bottom: -120px;
+
+  width: 270px;
+  height: 270px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(47, 221, 251, .12),
+      transparent 68%
+    );
+
+  filter: blur(20px);
+
+  opacity: .55;
+
+  transition:
+    transform .7s ease,
+    opacity .7s ease;
+}
+
+.arrival-card:hover .card-water-glow {
+  transform:
+    scale(1.45);
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   INFORMATION CARDS
+========================================================= */
+
+.arrival-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 18px;
+}
+
+.arrival-info-card {
+  position: relative;
+
+  min-height: 175px;
+
+  padding: 23px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(73, 216, 244, .11);
+
+  border-radius: 18px;
+
+  background:
+    rgba(4, 28, 42, .46);
+
+  box-shadow:
+    inset 0 1px
+      rgba(220, 252, 255, .04);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+
+  transition:
+    transform .4s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.arrival-info-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(78, 225, 250, .25);
+
+  background:
+    rgba(5, 38, 54, .55);
+}
+
+.arrival-info-card.highlight {
+  border-color:
+    rgba(75, 226, 250, .25);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 64, 83, .45),
+      rgba(3, 28, 43, .58)
+    );
+}
+
+.info-label {
+  display: block;
+
+  margin-bottom: 17px;
+
+  color:
+    rgba(76, 225, 249, .54);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: .18em;
+}
+
+.arrival-info-card h3 {
+  margin:
+    0 0 9px;
+
+  color:
+    rgba(229, 250, 254, .9);
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.arrival-info-card p {
+  margin: 0;
+
+  color:
+    rgba(171, 208, 217, .53);
+
+  font-size: 10px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   BOTTOM ACTION
+========================================================= */
+
+.arrival-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-top: 25px;
+
+  padding:
+    20px
+    23px;
+
+  border:
+    1px solid
+    rgba(72, 218, 247, .14);
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 39, 54, .45),
+      rgba(2, 22, 34, .62)
+    );
+
+  backdrop-filter:
+    blur(17px);
+
+  -webkit-backdrop-filter:
+    blur(17px);
+}
+
+.arrival-bottom-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.bottom-status {
+  color:
+    rgba(82, 228, 250, .52);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: .17em;
+}
+
+.arrival-bottom strong {
+  color:
+    rgba(222, 249, 253, .78);
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.arrival-cta {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding:
+    12px
+    17px;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid
+    rgba(81, 228, 250, .26);
+
+  border-radius: 999px;
+
+  color:
+    rgba(224, 250, 254, .85);
+
+  background:
+    rgba(54, 213, 239, .055);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: .08em;
+
+  transition:
+    transform .35s ease,
+    background .35s ease,
+    border-color .35s ease,
+    color .35s ease,
+    box-shadow .35s ease;
+}
+
+.arrival-cta:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(88, 234, 255, .58);
+
+  color:
+    #061820;
+
+  background:
+    #65eaff;
+
+  box-shadow:
+    0 0 25px
+      rgba(75, 229, 255, .22);
+}
+
+.arrival-cta-arrow {
+  font-size: 14px;
+
+  transition:
+    transform .35s ease;
+}
+
+.arrival-cta:hover .arrival-cta-arrow {
+  transform:
+    translateX(4px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .arrival-flow {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .flow-line {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .arrival-section {
+    padding:
+      95px
+      15px
+      75px;
+  }
+
+  .arrival-heading {
+    margin-bottom: 40px;
+  }
+
+  .arrival-heading h2 {
+    font-size:
+      clamp(40px, 11vw, 58px);
+  }
+
+  .arrival-heading p {
+    font-size: 11px;
+  }
+
+  .arrival-flow {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .arrival-card {
+    min-height: 250px;
+
+    padding: 20px;
+  }
+
+  .card-icon {
+    margin-bottom: 43px;
+  }
+
+  .arrival-info-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .arrival-info-card {
+    min-height: auto;
+  }
+
+  .arrival-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 17px;
+  }
+
+  .arrival-cta {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .arrival-section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .arrival-eyebrow {
+    font-size: 7px;
+
+    letter-spacing: .18em;
+  }
+
+  .arrival-heading h2 {
+    font-size: 37px;
+  }
+
+  .arrival-card {
+    min-height: 235px;
+
+    padding: 18px;
+  }
+
+  .card-content h3 {
+    font-size: 15px;
+  }
+
+  .card-content p {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .arrival-section *,
+  .arrival-section *::before,
+  .arrival-section *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}New-Item .\src\FAQSearch.css -ItemType File
