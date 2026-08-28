@@ -1,121 +1,191 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'Arrival Guide', href: '#guide' },
+  { name: 'Checklist', href: '#checklist' },
+  { name: 'FAQ', href: '#faq' },
+  { name: 'Help', href: '#help' },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="semaphore-page">
+
+      {/* =====================================================
+          REAL UNDERWATER BACKGROUND
+      ====================================================== */}
+
+      <div className="underwater-scene" aria-hidden="true">
+        <div className="scene-surface" />
+        <div className="scene-rays scene-rays-one" />
+        <div className="scene-rays scene-rays-two" />
+        <div className="scene-caustics" />
+        <div className="scene-haze" />
+
+        <div className="scene-particles">
+          {Array.from({ length: 42 }).map((_, index) => (
+            <span
+              key={index}
+              className={`scene-particle particle-${index + 1}`}
+            />
+          ))}
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+
+        <div className="scene-bubbles">
+          {Array.from({ length: 18 }).map((_, index) => (
+            <span
+              key={index}
+              className={`scene-bubble bubble-${index + 1}`}
+            />
+          ))}
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+      </div>
+
+      {/* Atmospheric depth */}
+      <div className="depth-overlay" aria-hidden="true" />
+
+      {/* =====================================================
+          HEADER
+      ====================================================== */}
+
+      <header className="semaphore-header">
+
+        <div className="header-top-shimmer" />
+
+        {/* TOP ROW */}
+        <div className="header-top">
+
+          {/* NITTE + SAMCA */}
+          <div className="institution-group">
+
+            <a href="#home" className="institution nitte">
+              <div className="logo-box nitte-logo">
+                <span>N</span>
+              </div>
+
+              <div className="institution-copy">
+                <strong>NITTE</strong>
+                <small>Deemed to be University</small>
+              </div>
+            </a>
+
+            <div className="institution-divider" />
+
+            <a href="#home" className="institution samca">
+              <div className="logo-box samca-logo">
+                <span>S</span>
+              </div>
+
+              <div className="institution-copy">
+                <strong>SAMCA</strong>
+                <small>NITTE</small>
+              </div>
+            </a>
+
+          </div>
+
+          {/* SEMAPHORE */}
+          <a href="#home" className="semaphore-wordmark" aria-label="Semaphore">
+            <span>S</span>
+            <span>E</span>
+            <span>M</span>
+            <span>A</span>
+            <span>P</span>
+            <span>H</span>
+            <span className="ocean-o">O</span>
+            <span>R</span>
+            <span>E</span>
+          </a>
+
+          {/* DESKTOP CHECK IN */}
+          <a href="#checkin" className="checkin-button">
+            <span>Check In</span>
+            <span className="checkin-arrow">→</span>
+          </a>
+
+          {/* MOBILE MENU */}
+          <button
+            className={`mobile-menu ${menuOpen ? 'active' : ''}`}
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            type="button"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+        </div>
+
+        {/* DIVIDER */}
+        <div className="header-divider" />
+
+        {/* NAVIGATION */}
+        <nav
+          className={`main-navigation ${menuOpen ? 'open' : ''}`}
+          aria-label="Main navigation"
         >
-          Count is {count}
-        </button>
-      </section>
+          {navItems.map((item, index) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={`navigation-item ${
+                index === 0 ? 'current' : ''
+              }`}
+              onClick={() => setMenuOpen(false)}
+            >
+              <span>{item.name}</span>
+            </a>
+          ))}
+        </nav>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        {/* WATER EDGE */}
+        <div className="header-water-edge" aria-hidden="true">
+          <div className="water-wave wave-one" />
+          <div className="water-wave wave-two" />
+          <div className="water-wave wave-three" />
+          <div className="edge-light" />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      </header>
+
+      {/* =====================================================
+          TEMPORARY HERO
+          We'll replace this with the actual module.
+      ====================================================== */}
+
+      <main className="temporary-space" id="home">
+
+        <div className="hero-depth-glow" />
+
+        <div className="temporary-inner">
+
+          <div className="eyebrow">
+            <span />
+            SEMAPHORE
+            <span />
+          </div>
+
+          <h1>
+            Welcome to the
+            <br />
+            <strong>underwater experience.</strong>
+          </h1>
+
+          <p>
+            Participant information portal
+          </p>
+
+        </div>
+
+      </main>
+
+    </div>
   )
 }
 
