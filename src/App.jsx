@@ -1,19 +1,26 @@
 import { useState } from 'react'
 import './App.css'
+
 import ArrivalCheckin from './ArrivalCheckin'
 import ParticipantChecklist from './ParticipantChecklist'
 import FAQSearch from './FAQSearch'
+import FAQRules from './FAQRules'
+import CampusMap from './CampusMap'
 
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'Arrival Guide', href: '#guide' },
   { name: 'Checklist', href: '#checklist' },
-  { name: 'FAQ', href: '#faq' },
+  { name: 'FAQ', href: '#faq-rules' },
   { name: 'Help', href: '#help' },
 ]
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+  }
 
   return (
     <div className="semaphore-page">
@@ -36,6 +43,8 @@ function App() {
 
         <div className="scene-haze" />
 
+        {/* Floating particles */}
+
         <div className="scene-particles">
           {Array.from({ length: 42 }).map((_, index) => (
             <span
@@ -44,6 +53,8 @@ function App() {
             />
           ))}
         </div>
+
+        {/* Rising bubbles */}
 
         <div className="scene-bubbles">
           {Array.from({ length: 18 }).map((_, index) => (
@@ -71,6 +82,7 @@ function App() {
       <header className="semaphore-header">
 
         {/* Animated top shimmer */}
+
         <div className="header-top-shimmer" />
 
         {/* =================================================
@@ -79,12 +91,16 @@ function App() {
 
         <div className="header-top">
 
-          {/* NITTE + SAMCA */}
+          {/* =================================================
+              NITTE + SAMCA
+          ================================================== */}
+
           <div className="institution-group">
 
             <a
               href="#home"
               className="institution nitte"
+              onClick={closeMenu}
             >
               <div className="logo-box nitte-logo">
                 <span>N</span>
@@ -99,11 +115,15 @@ function App() {
               </div>
             </a>
 
-            <div className="institution-divider" />
+            <div
+              className="institution-divider"
+              aria-hidden="true"
+            />
 
             <a
               href="#home"
               className="institution samca"
+              onClick={closeMenu}
             >
               <div className="logo-box samca-logo">
                 <span>S</span>
@@ -127,7 +147,8 @@ function App() {
           <a
             href="#home"
             className="semaphore-wordmark"
-            aria-label="Semaphore"
+            aria-label="Semaphore home"
+            onClick={closeMenu}
           >
             <span>S</span>
             <span>E</span>
@@ -172,7 +193,11 @@ function App() {
             onClick={() =>
               setMenuOpen((open) => !open)
             }
-            aria-label="Toggle navigation"
+            aria-label={
+              menuOpen
+                ? 'Close navigation'
+                : 'Open navigation'
+            }
             aria-expanded={menuOpen}
             type="button"
           >
@@ -208,9 +233,7 @@ function App() {
                   ? 'current'
                   : ''
               }`}
-              onClick={() =>
-                setMenuOpen(false)
-              }
+              onClick={closeMenu}
             >
               <span>
                 {item.name}
@@ -247,7 +270,10 @@ function App() {
         id="home"
       >
 
-        <div className="hero-depth-glow" />
+        <div
+          className="hero-depth-glow"
+          aria-hidden="true"
+        />
 
         <div className="temporary-inner">
 
@@ -293,6 +319,27 @@ function App() {
       ====================================================== */}
 
       <FAQSearch />
+
+      {/* =====================================================
+          FAQ & RULES ACCORDION
+      ====================================================== */}
+
+      <FAQRules />
+
+      {/* =====================================================
+          CAMPUS MAP & FACILITIES
+      ====================================================== */}
+
+      <CampusMap />
+
+      {/* =====================================================
+          FUTURE MODULES
+      ======================================================
+
+          Helpdesk & Emergency Contacts
+          Footer & Main Website Link
+
+      ====================================================== */}
 
     </div>
   )

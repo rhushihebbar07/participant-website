@@ -1,200 +1,642 @@
-import './ArrivalCheckin.css'
+import { useState } from 'react'
+import './CampusMap.css'
 
-const steps = [
+const locations = [
   {
-    number: '01',
-    title: 'Prepare before arrival',
-    text: 'Keep your registration details and required documents ready before reaching the venue.',
-    icon: '◈',
-  },
-  {
-    number: '02',
-    title: 'Reach the venue',
-    text: 'Follow the event directions and arrive within the designated participant arrival window.',
-    icon: '⌖',
-  },
-  {
-    number: '03',
-    title: 'Find the check-in desk',
-    text: 'Proceed to the participant check-in area and keep your registration information available.',
+    id: '01',
+    category: 'ACADEMIC',
+    name: 'S. Ramanujan Block',
+    description:
+      'Administrative Building 1 and an important academic block of NMAMIT.',
     icon: '▣',
+    search:
+      'S Ramanujan Block NMAMIT Nitte Karkala Karnataka',
   },
   {
-    number: '04',
-    title: 'Complete check-in',
-    text: 'Verify your details with the event team and collect the information provided.',
-    icon: '✓',
+    id: '02',
+    category: 'ACADEMIC',
+    name: 'APJ Kalam Block',
+    description:
+      'Administrative Building 2 and home to academic and seminar facilities.',
+    icon: '▣',
+    search:
+      'APJ Kalam Block NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '03',
+    category: 'ACADEMIC',
+    name: 'Sir C.V. Raman Block',
+    description:
+      'Lecture Hall Complex used for academic sessions and participant activities.',
+    icon: '▤',
+    search:
+      'Sir CV Raman Block NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '04',
+    category: 'ACADEMIC',
+    name: 'Sir M.V. Block',
+    description:
+      'Lecture Hall Complex serving the academic community at NMAMIT.',
+    icon: '▤',
+    search:
+      'Sir MV Block NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '05',
+    category: 'INNOVATION',
+    name: 'Atal Block',
+    description:
+      'Home to the Entrepreneurship Development Cell and academic facilities.',
+    icon: '◇',
+    search:
+      'Atal Block NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '06',
+    category: 'LEARNING',
+    name: 'Central Library',
+    description:
+      'The NMAMIT Central Library is housed in the main wing of the college academic building.',
+    icon: '▤',
+    search:
+      'Central Library NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '07',
+    category: 'EVENT',
+    name: 'Sadananda Open Air Auditorium',
+    description:
+      'Open-air auditorium located near the Hockey Ground at the B.C. Alva Sports Complex.',
+    icon: '◉',
+    search:
+      'Sadananda Open Air Auditorium NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '08',
+    category: 'EVENT',
+    name: 'Sambhram Auditorium',
+    description:
+      'Auditorium associated with the S. Ramanujan Block.',
+    icon: '◉',
+    search:
+      'Sambhram Auditorium NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '09',
+    category: 'EVENT',
+    name: 'Shambhavi Auditorium',
+    description:
+      'Auditorium associated with the APJ Kalam Block.',
+    icon: '◉',
+    search:
+      'Shambhavi Auditorium NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '10',
+    category: 'SPORTS',
+    name: 'B.C. Alva Sports Complex',
+    description:
+      'Major sports facility with indoor and outdoor sporting infrastructure.',
+    icon: '◇',
+    search:
+      'BC Alva Sports Complex NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '11',
+    category: 'FOOD',
+    name: 'NMAMIT Canteen',
+    description:
+      'Campus food and refreshment facility.',
+    icon: '◈',
+    search:
+      'NMAMIT Canteen Nitte Karkala Karnataka',
+  },
+  {
+    id: '12',
+    category: 'HOSTELS',
+    name: 'Boys Hostel Block 7',
+    description:
+      'One of the boys hostel blocks within the NMAMIT campus.',
+    icon: '⌂',
+    search:
+      'Boys Hostel Block 7 NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '13',
+    category: 'HOSTELS',
+    name: 'Ladies Hostel Block 1',
+    description:
+      'One of the girls hostel blocks within the NMAMIT campus.',
+    icon: '⌂',
+    search:
+      'Ladies Hostel Block 1 NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '14',
+    category: 'HEALTH',
+    name: 'Health Centre',
+    description:
+      'Healthcare facility available on the NMAMIT campus.',
+    icon: '+',
+    search:
+      'Health Centre NMAMIT Nitte Karkala Karnataka',
+  },
+  {
+    id: '15',
+    category: 'SERVICES',
+    name: 'Bank & Post Office',
+    description:
+      'Campus banking and postal services.',
+    icon: '◇',
+    search:
+      'Bank Post Office NMAMIT Nitte Karkala Karnataka',
   },
 ]
 
-function ArrivalCheckin() {
+const campusSearch =
+  'NMAM Institute of Technology Nitte Karkala Karnataka'
+
+function CampusMap() {
+  const [selected, setSelected] = useState(null)
+  const [mapQuery, setMapQuery] = useState(campusSearch)
+  const [mapKey, setMapKey] = useState(0)
+
+  const buildMapUrl = (query) => {
+    return (
+      'https://www.google.com/maps' +
+      '?q=' +
+      encodeURIComponent(query) +
+      '&output=embed'
+    )
+  }
+
+  const selectLocation = (location) => {
+    setSelected(location)
+    setMapQuery(location.search)
+
+    // Force iframe refresh so Google Maps
+    // resolves the newly selected destination.
+    setMapKey((key) => key + 1)
+  }
+
+  const resetMap = () => {
+    setSelected(null)
+    setMapQuery(campusSearch)
+    setMapKey((key) => key + 1)
+  }
+
   return (
     <section
-      id="guide"
-      className="arrival-section"
-      aria-labelledby="arrival-title"
+      id="map"
+      className="campus-map-section"
+      aria-labelledby="campus-map-title"
     >
+
+      {/* =====================================================
+          ATMOSPHERE
+      ====================================================== */}
+
       <div
-        className="arrival-glow arrival-glow-one"
+        className="campus-map-glow campus-map-glow-one"
         aria-hidden="true"
       />
 
       <div
-        className="arrival-glow arrival-glow-two"
+        className="campus-map-glow campus-map-glow-two"
         aria-hidden="true"
       />
 
-      <div className="arrival-container">
+      <div className="campus-map-container">
 
-        <div className="arrival-heading">
+        {/* =====================================================
+            HEADING
+        ====================================================== */}
 
-          <div className="arrival-eyebrow">
-            <span className="arrival-line" />
-            ARRIVAL &amp; CHECK-IN
-            <span className="arrival-line" />
+        <div className="campus-map-heading">
+
+          <div className="campus-map-eyebrow">
+            <span />
+            NMAMIT CAMPUS NAVIGATION
+            <span />
           </div>
 
-          <h2 id="arrival-title">
-            Begin your journey
+          <h2 id="campus-map-title">
+            Explore NMAMIT
             <br />
-            <span>with confidence.</span>
+            <strong>Everywhere you need to go.</strong>
           </h2>
 
           <p>
-            A simple step-by-step guide to help you
-            arrive, check in and get ready for the
-            Semaphore experience.
+            Explore the NMAM Institute of Technology
+            campus in Nitte, Karkala. Select a building,
+            facility or event venue to focus the map on
+            that destination.
           </p>
 
         </div>
 
-        <div className="arrival-flow">
+        {/* =====================================================
+            MAIN MAP AREA
+        ====================================================== */}
 
-          <div
-            className="flow-line"
-            aria-hidden="true"
-          />
+        <div className="campus-map-layout">
 
-          {steps.map((step) => (
-            <article
-              className="arrival-card"
-              key={step.number}
-            >
-              <div className="card-number">
-                {step.number}
+          {/* =================================================
+              MAP
+          ================================================== */}
+
+          <div className="campus-map-card">
+
+            <div className="map-card-top">
+
+              <div className="map-title-status">
+
+                <span className="map-live-dot" />
+
+                <span>
+                  {selected
+                    ? `FOCUS · ${selected.name.toUpperCase()}`
+                    : 'FULL CAMPUS VIEW'}
+                </span>
+
               </div>
+
+              <span className="map-coordinates">
+                13.1831° N / 74.9342° E
+              </span>
+
+            </div>
+
+            {/* =================================================
+                REAL MAP
+            ================================================== */}
+
+            <div className="real-map-container">
+
+              <iframe
+                key={mapKey}
+                title={
+                  selected
+                    ? `${selected.name} NMAMIT map`
+                    : 'NMAMIT Nitte campus map'
+                }
+                src={buildMapUrl(mapQuery)}
+                className="real-campus-map"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* Underwater colour treatment */}
 
               <div
-                className="card-icon"
+                className="map-atmosphere"
+                aria-hidden="true"
+              />
+
+              {/* Selected destination */}
+
+              {selected && (
+                <div className="selected-map-badge">
+
+                  <span className="selected-map-pulse" />
+
+                  <div>
+                    <small>
+                      SELECTED DESTINATION
+                    </small>
+
+                    <strong>
+                      {selected.name}
+                    </strong>
+                  </div>
+
+                </div>
+              )}
+
+              {/* Compass */}
+
+              <div
+                className="map-compass"
                 aria-hidden="true"
               >
-                {step.icon}
+                <small>N</small>
+                <strong>▲</strong>
               </div>
 
-              <div className="card-content">
+              {/* Reset */}
+
+              {selected && (
+                <button
+                  type="button"
+                  className="map-reset"
+                  onClick={resetMap}
+                >
+                  <span>↺</span>
+                  FULL CAMPUS
+                </button>
+              )}
+
+            </div>
+
+            {/* =================================================
+                MAP FOOTER
+            ================================================== */}
+
+            <div className="map-card-bottom">
+
+              <span>
+                <i />
+                REAL CAMPUS MAP
+              </span>
+
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  selected
+                    ? selected.search
+                    : campusSearch,
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                OPEN IN GOOGLE MAPS
+                <strong>↗</strong>
+              </a>
+
+            </div>
+
+          </div>
+
+          {/* =================================================
+              SELECTED LOCATION
+          ================================================== */}
+
+          <aside className="facility-detail">
+
+            {selected ? (
+              <>
+                <div className="facility-detail-top">
+
+                  <span>
+                    LOCATION {selected.id}
+                  </span>
+
+                  <span className="facility-status">
+                    SELECTED
+                  </span>
+
+                </div>
+
+                <div className="facility-icon-large">
+                  {selected.icon}
+                </div>
+
+                <span className="facility-type">
+                  {selected.category}
+                </span>
+
                 <h3>
-                  {step.title}
+                  {selected.name}
                 </h3>
 
                 <p>
-                  {step.text}
+                  {selected.description}
                 </p>
-              </div>
 
-              <div
-                className="card-water-glow"
-                aria-hidden="true"
-              />
-            </article>
-          ))}
+                <div className="facility-divider" />
+
+                <div className="facility-meta">
+
+                  <div>
+                    <span>
+                      CAMPUS
+                    </span>
+
+                    <strong>
+                      NMAMIT
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>
+                      AREA
+                    </span>
+
+                    <strong>
+                      NITTE
+                    </strong>
+                  </div>
+
+                </div>
+
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    selected.search,
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="facility-directions"
+                >
+                  <span>
+                    Open destination
+                  </span>
+
+                  <strong>
+                    ↗
+                  </strong>
+                </a>
+              </>
+            ) : (
+              <>
+                <div className="facility-detail-top">
+
+                  <span>
+                    NMAMIT CAMPUS
+                  </span>
+
+                  <span className="facility-status">
+                    READY
+                  </span>
+
+                </div>
+
+                <div className="facility-icon-large campus-icon">
+                  N
+                </div>
+
+                <span className="facility-type">
+                  NITTE · KARKALA
+                </span>
+
+                <h3>
+                  Full Campus
+                </h3>
+
+                <p>
+                  Select any location below to focus
+                  the map on that destination.
+                </p>
+
+                <div className="facility-divider" />
+
+                <div className="facility-meta">
+
+                  <div>
+                    <span>
+                      LOCATIONS
+                    </span>
+
+                    <strong>
+                      {locations.length}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>
+                      CAMPUS
+                    </span>
+
+                    <strong>
+                      NMAMIT
+                    </strong>
+                  </div>
+
+                </div>
+
+                <button
+                  type="button"
+                  className="facility-directions reset-button"
+                  onClick={resetMap}
+                >
+                  <span>
+                    Reset full campus
+                  </span>
+
+                  <strong>
+                    ↺
+                  </strong>
+                </button>
+              </>
+            )}
+
+          </aside>
 
         </div>
 
-        <div className="arrival-info-grid">
+        {/* =====================================================
+            LOCATION DIRECTORY
+        ====================================================== */}
 
-          <article className="arrival-info-card">
-            <span className="info-label">
-              BEFORE YOU ARRIVE
+        <div className="facilities-heading">
+
+          <div>
+            <span>
+              CAMPUS DIRECTORY
             </span>
 
             <h3>
-              Keep everything ready.
+              Find your destination
             </h3>
+          </div>
 
-            <p>
-              Registration details, identification
-              and any required event material should
-              be easily accessible.
-            </p>
-          </article>
-
-          <article className="arrival-info-card highlight">
-            <span className="info-label">
-              CHECK-IN
-            </span>
-
-            <h3>
-              Follow the flow.
-            </h3>
-
-            <p>
-              Reach the designated participant desk,
-              verify your details and follow the
-              instructions from the event team.
-            </p>
-          </article>
-
-          <article className="arrival-info-card">
-            <span className="info-label">
-              NEED HELP?
-            </span>
-
-            <h3>
-              We&apos;re here for you.
-            </h3>
-
-            <p>
-              If you are unsure where to go,
-              use the Help section or contact
-              the event helpdesk.
-            </p>
-          </article>
+          <p>
+            Click a destination to move the map
+            directly to that part of NMAMIT.
+          </p>
 
         </div>
 
-        <div className="arrival-bottom">
+        <div className="facility-cards">
 
-          <div className="arrival-bottom-copy">
-            <span className="bottom-status">
-              ● PARTICIPANT GUIDE
+          {locations.map((location) => {
+
+            const active =
+              selected?.id === location.id
+
+            return (
+              <button
+                type="button"
+                key={location.id}
+                className={`facility-card ${
+                  active ? 'selected' : ''
+                }`}
+                onClick={() =>
+                  selectLocation(location)
+                }
+              >
+
+                <div className="facility-card-number">
+                  {location.id}
+                </div>
+
+                <div className="facility-card-icon">
+                  {location.icon}
+                </div>
+
+                <div className="facility-card-copy">
+
+                  <span>
+                    {location.category}
+                  </span>
+
+                  <h4>
+                    {location.name}
+                  </h4>
+
+                </div>
+
+                <div className="facility-card-arrow">
+                  {active ? '●' : '→'}
+                </div>
+
+                <div
+                  className="facility-card-glow"
+                  aria-hidden="true"
+                />
+
+              </button>
+            )
+          })}
+
+        </div>
+
+        {/* =====================================================
+            LOCATION STRIP
+        ====================================================== */}
+
+        <div className="campus-location-strip">
+
+          <div className="location-pulse">
+            <span />
+          </div>
+
+          <div className="location-copy">
+
+            <span>
+              NMAM INSTITUTE OF TECHNOLOGY
             </span>
 
             <strong>
-              Arrive prepared. Stay informed.
+              Nitte, Karkala Taluk, Udupi – 574110
             </strong>
+
           </div>
 
           <a
-            href="#checklist"
-            className="arrival-cta"
+            href="https://www.google.com/maps/search/?api=1&query=NMAM+Institute+of+Technology+Nitte+Karkala+Karnataka"
+            target="_blank"
+            rel="noreferrer"
           >
-            <span>
-              View Checklist
-            </span>
-
-            <span
-              className="arrival-cta-arrow"
-              aria-hidden="true"
-            >
-              →
-            </span>
+            Directions
+            <span>↗</span>
           </a>
 
         </div>
 
       </div>
+
     </section>
   )
 }
 
-export default ArrivalCheckin
+export default CampusMap
