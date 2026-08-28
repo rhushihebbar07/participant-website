@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import ParticipantChecklist from './ParticipantChecklist'
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -19,11 +20,18 @@ function App() {
           REAL UNDERWATER BACKGROUND
       ====================================================== */}
 
-      <div className="underwater-scene" aria-hidden="true">
+      <div
+        className="underwater-scene"
+        aria-hidden="true"
+      >
         <div className="scene-surface" />
+
         <div className="scene-rays scene-rays-one" />
+
         <div className="scene-rays scene-rays-two" />
+
         <div className="scene-caustics" />
+
         <div className="scene-haze" />
 
         <div className="scene-particles">
@@ -46,7 +54,10 @@ function App() {
       </div>
 
       {/* Atmospheric depth */}
-      <div className="depth-overlay" aria-hidden="true" />
+      <div
+        className="depth-overlay"
+        aria-hidden="true"
+      />
 
       {/* =====================================================
           HEADER
@@ -54,63 +65,108 @@ function App() {
 
       <header className="semaphore-header">
 
+        {/* Animated top shimmer */}
         <div className="header-top-shimmer" />
 
-        {/* TOP ROW */}
+        {/* =================================================
+            TOP ROW
+        ================================================== */}
+
         <div className="header-top">
 
           {/* NITTE + SAMCA */}
           <div className="institution-group">
 
-            <a href="#home" className="institution nitte">
+            <a
+              href="#home"
+              className="institution nitte"
+            >
               <div className="logo-box nitte-logo">
                 <span>N</span>
               </div>
 
               <div className="institution-copy">
                 <strong>NITTE</strong>
-                <small>Deemed to be University</small>
+
+                <small>
+                  Deemed to be University
+                </small>
               </div>
             </a>
 
             <div className="institution-divider" />
 
-            <a href="#home" className="institution samca">
+            <a
+              href="#home"
+              className="institution samca"
+            >
               <div className="logo-box samca-logo">
                 <span>S</span>
               </div>
 
               <div className="institution-copy">
                 <strong>SAMCA</strong>
-                <small>NITTE</small>
+
+                <small>
+                  NITTE
+                </small>
               </div>
             </a>
 
           </div>
 
-          {/* SEMAPHORE */}
-          <a href="#home" className="semaphore-wordmark" aria-label="Semaphore">
+          {/* =================================================
+              SEMAPHORE WORDMARK
+          ================================================== */}
+
+          <a
+            href="#home"
+            className="semaphore-wordmark"
+            aria-label="Semaphore"
+          >
             <span>S</span>
             <span>E</span>
             <span>M</span>
             <span>A</span>
             <span>P</span>
             <span>H</span>
-            <span className="ocean-o">O</span>
+
+            <span className="ocean-o">
+              O
+            </span>
+
             <span>R</span>
             <span>E</span>
           </a>
 
-          {/* DESKTOP CHECK IN */}
-          <a href="#checkin" className="checkin-button">
-            <span>Check In</span>
-            <span className="checkin-arrow">→</span>
+          {/* =================================================
+              DESKTOP CHECK-IN
+          ================================================== */}
+
+          <a
+            href="#checkin"
+            className="checkin-button"
+          >
+            <span>
+              Check In
+            </span>
+
+            <span className="checkin-arrow">
+              →
+            </span>
           </a>
 
-          {/* MOBILE MENU */}
+          {/* =================================================
+              MOBILE MENU
+          ================================================== */}
+
           <button
-            className={`mobile-menu ${menuOpen ? 'active' : ''}`}
-            onClick={() => setMenuOpen((open) => !open)}
+            className={`mobile-menu ${
+              menuOpen ? 'active' : ''
+            }`}
+            onClick={() =>
+              setMenuOpen((open) => !open)
+            }
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             type="button"
@@ -122,12 +178,20 @@ function App() {
 
         </div>
 
-        {/* DIVIDER */}
+        {/* =================================================
+            DIVIDER
+        ================================================== */}
+
         <div className="header-divider" />
 
-        {/* NAVIGATION */}
+        {/* =================================================
+            NAVIGATION
+        ================================================== */}
+
         <nav
-          className={`main-navigation ${menuOpen ? 'open' : ''}`}
+          className={`main-navigation ${
+            menuOpen ? 'open' : ''
+          }`}
           aria-label="Main navigation"
         >
           {navItems.map((item, index) => (
@@ -135,20 +199,35 @@ function App() {
               key={item.name}
               href={item.href}
               className={`navigation-item ${
-                index === 0 ? 'current' : ''
+                index === 0
+                  ? 'current'
+                  : ''
               }`}
-              onClick={() => setMenuOpen(false)}
+              onClick={() =>
+                setMenuOpen(false)
+              }
             >
-              <span>{item.name}</span>
+              <span>
+                {item.name}
+              </span>
             </a>
           ))}
         </nav>
 
-        {/* WATER EDGE */}
-        <div className="header-water-edge" aria-hidden="true">
+        {/* =================================================
+            ANIMATED WATER EDGE
+        ================================================== */}
+
+        <div
+          className="header-water-edge"
+          aria-hidden="true"
+        >
           <div className="water-wave wave-one" />
+
           <div className="water-wave wave-two" />
+
           <div className="water-wave wave-three" />
+
           <div className="edge-light" />
         </div>
 
@@ -156,10 +235,12 @@ function App() {
 
       {/* =====================================================
           TEMPORARY HERO
-          We'll replace this with the actual module.
       ====================================================== */}
 
-      <main className="temporary-space" id="home">
+      <main
+        className="temporary-space"
+        id="home"
+      >
 
         <div className="hero-depth-glow" />
 
@@ -167,14 +248,19 @@ function App() {
 
           <div className="eyebrow">
             <span />
+
             SEMAPHORE
+
             <span />
           </div>
 
           <h1>
             Welcome to the
             <br />
-            <strong>underwater experience.</strong>
+
+            <strong>
+              underwater experience.
+            </strong>
           </h1>
 
           <p>
@@ -184,6 +270,12 @@ function App() {
         </div>
 
       </main>
+
+      {/* =====================================================
+          PARTICIPANT CHECKLIST HUB
+      ====================================================== */}
+
+      <ParticipantChecklist />
 
     </div>
   )
