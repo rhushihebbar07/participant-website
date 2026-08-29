@@ -1,11 +1,21 @@
 import { useState } from 'react'
 import './App.css'
 
+import ArrivalCheckin from './ArrivalCheckin'
+import ParticipantChecklist from './ParticipantChecklist'
+import FAQSearch from './FAQSearch'
+import FAQRules from './FAQRules'
+import CampusMap from './CampusMap'
+import HelpdeskEmergency from './HelpdeskEmergency'
+import Footer from './Footer'
+import Events from './Events'
+
 const navItems = [
   { name: 'Home', href: '#home' },
+  { name: 'Events', href: '#events' },
   { name: 'Arrival Guide', href: '#guide' },
   { name: 'Checklist', href: '#checklist' },
-  { name: 'FAQ', href: '#faq' },
+  { name: 'FAQ', href: '#faq-rules' },
   { name: 'Help', href: '#help' },
 ]
 
@@ -16,15 +26,24 @@ function App() {
     <div className="semaphore-page">
 
       {/* =====================================================
-          REAL UNDERWATER BACKGROUND
+          UNDERWATER BACKGROUND
       ====================================================== */}
 
-      <div className="underwater-scene" aria-hidden="true">
+      <div
+        className="underwater-scene"
+        aria-hidden="true"
+      >
         <div className="scene-surface" />
+
         <div className="scene-rays scene-rays-one" />
+
         <div className="scene-rays scene-rays-two" />
+
         <div className="scene-caustics" />
+
         <div className="scene-haze" />
+
+        {/* Floating particles */}
 
         <div className="scene-particles">
           {Array.from({ length: 42 }).map((_, index) => (
@@ -34,6 +53,8 @@ function App() {
             />
           ))}
         </div>
+
+        {/* Rising bubbles */}
 
         <div className="scene-bubbles">
           {Array.from({ length: 18 }).map((_, index) => (
@@ -46,7 +67,11 @@ function App() {
       </div>
 
       {/* Atmospheric depth */}
-      <div className="depth-overlay" aria-hidden="true" />
+
+      <div
+        className="depth-overlay"
+        aria-hidden="true"
+      />
 
       {/* =====================================================
           HEADER
@@ -57,60 +82,97 @@ function App() {
         <div className="header-top-shimmer" />
 
         {/* TOP ROW */}
+
         <div className="header-top">
 
           {/* NITTE + SAMCA */}
+
           <div className="institution-group">
 
-            <a href="#home" className="institution nitte">
+            <a
+              href="#home"
+              className="institution nitte"
+            >
               <div className="logo-box nitte-logo">
                 <span>N</span>
               </div>
 
               <div className="institution-copy">
                 <strong>NITTE</strong>
-                <small>Deemed to be University</small>
+
+                <small>
+                  Deemed to be University
+                </small>
               </div>
             </a>
 
             <div className="institution-divider" />
 
-            <a href="#home" className="institution samca">
+            <a
+              href="#home"
+              className="institution samca"
+            >
               <div className="logo-box samca-logo">
                 <span>S</span>
               </div>
 
               <div className="institution-copy">
                 <strong>SAMCA</strong>
-                <small>NITTE</small>
+
+                <small>
+                  NITTE
+                </small>
               </div>
             </a>
 
           </div>
 
-          {/* SEMAPHORE */}
-          <a href="#home" className="semaphore-wordmark" aria-label="Semaphore">
+          {/* SEMAPHORE WORDMARK */}
+
+          <a
+            href="#home"
+            className="semaphore-wordmark"
+            aria-label="Semaphore"
+          >
             <span>S</span>
             <span>E</span>
             <span>M</span>
             <span>A</span>
             <span>P</span>
             <span>H</span>
-            <span className="ocean-o">O</span>
+
+            <span className="ocean-o">
+              O
+            </span>
+
             <span>R</span>
             <span>E</span>
           </a>
 
-          {/* DESKTOP CHECK IN */}
-          <a href="#checkin" className="checkin-button">
-            <span>Check In</span>
-            <span className="checkin-arrow">→</span>
+          {/* CHECK IN */}
+
+          <a
+            href="#checkin"
+            className="checkin-button"
+          >
+            <span>
+              Check In
+            </span>
+
+            <span className="checkin-arrow">
+              →
+            </span>
           </a>
 
           {/* MOBILE MENU */}
+
           <button
-            className={`mobile-menu ${menuOpen ? 'active' : ''}`}
-            onClick={() => setMenuOpen((open) => !open)}
+            className={`mobile-menu ${
+              menuOpen ? 'active' : ''
+            }`}
+            onClick={() =>
+              setMenuOpen((open) => !open)
+            }
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             type="button"
@@ -122,12 +184,16 @@ function App() {
 
         </div>
 
-        {/* DIVIDER */}
+        {/* HEADER DIVIDER */}
+
         <div className="header-divider" />
 
         {/* NAVIGATION */}
+
         <nav
-          className={`main-navigation ${menuOpen ? 'open' : ''}`}
+          className={`main-navigation ${
+            menuOpen ? 'open' : ''
+          }`}
           aria-label="Main navigation"
         >
           {navItems.map((item, index) => (
@@ -137,15 +203,23 @@ function App() {
               className={`navigation-item ${
                 index === 0 ? 'current' : ''
               }`}
-              onClick={() => setMenuOpen(false)}
+              onClick={() =>
+                setMenuOpen(false)
+              }
             >
-              <span>{item.name}</span>
+              <span>
+                {item.name}
+              </span>
             </a>
           ))}
         </nav>
 
         {/* WATER EDGE */}
-        <div className="header-water-edge" aria-hidden="true">
+
+        <div
+          className="header-water-edge"
+          aria-hidden="true"
+        >
           <div className="water-wave wave-one" />
           <div className="water-wave wave-two" />
           <div className="water-wave wave-three" />
@@ -155,11 +229,13 @@ function App() {
       </header>
 
       {/* =====================================================
-          TEMPORARY HERO
-          We'll replace this with the actual module.
+          HOME / HERO
       ====================================================== */}
 
-      <main className="temporary-space" id="home">
+      <main
+        className="temporary-space"
+        id="home"
+      >
 
         <div className="hero-depth-glow" />
 
@@ -167,14 +243,19 @@ function App() {
 
           <div className="eyebrow">
             <span />
+
             SEMAPHORE
+
             <span />
           </div>
 
           <h1>
             Welcome to the
             <br />
-            <strong>underwater experience.</strong>
+
+            <strong>
+              underwater experience.
+            </strong>
           </h1>
 
           <p>
@@ -184,6 +265,56 @@ function App() {
         </div>
 
       </main>
+
+      {/* =====================================================
+          EVENTS PAGE
+      ====================================================== */}
+
+      <section id="events">
+        <Events />
+      </section>
+
+      {/* =====================================================
+          ARRIVAL & CHECK-IN GUIDE
+      ====================================================== */}
+
+      <ArrivalCheckin />
+
+      {/* =====================================================
+          PARTICIPANT CHECKLIST HUB
+      ====================================================== */}
+
+      <ParticipantChecklist />
+
+      {/* =====================================================
+          INSTANT FAQ SEARCH
+      ====================================================== */}
+
+      <FAQSearch />
+
+      {/* =====================================================
+          FAQ & RULES ACCORDION
+      ====================================================== */}
+
+      <FAQRules />
+
+      {/* =====================================================
+          CAMPUS MAP & FACILITIES
+      ====================================================== */}
+
+      <CampusMap />
+
+      {/* =====================================================
+          HELPDESK & EMERGENCY CONTACTS
+      ====================================================== */}
+
+      <HelpdeskEmergency />
+
+      {/* =====================================================
+          FOOTER & MAIN WEBSITE LINK
+      ====================================================== */}
+
+      <Footer />
 
     </div>
   )
