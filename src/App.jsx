@@ -7,6 +7,7 @@ import FAQSearch from './FAQSearch'
 import FAQRules from './FAQRules'
 import CampusMap from './CampusMap'
 import HelpdeskEmergency from './HelpdeskEmergency'
+import Footer from './Footer'
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -63,7 +64,9 @@ function App() {
         </div>
       </div>
 
-      {/* Atmospheric depth */}
+      {/* =====================================================
+          ATMOSPHERIC DEPTH
+      ====================================================== */}
 
       <div
         className="depth-overlay"
@@ -181,7 +184,7 @@ function App() {
 
         </div>
 
-        {/* DIVIDER */}
+        {/* HEADER DIVIDER */}
 
         <div className="header-divider" />
 
@@ -282,7 +285,7 @@ function App() {
       <FAQSearch />
 
       {/* =====================================================
-          FAQ & RULES
+          FAQ & RULES ACCORDION
       ====================================================== */}
 
       <FAQRules />
@@ -298,6 +301,12 @@ function App() {
       ====================================================== */}
 
       <HelpdeskEmergency />
+
+      {/* =====================================================
+          FOOTER & MAIN WEBSITE LINK
+      ====================================================== */}
+
+      <Footer />
 
     </div>
   )
