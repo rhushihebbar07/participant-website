@@ -66,7 +66,9 @@ function App() {
         </div>
       </div>
 
-      {/* Atmospheric depth */}
+      {/* =====================================================
+          ATMOSPHERIC DEPTH
+      ====================================================== */}
 
       <div
         className="depth-overlay"
@@ -78,6 +80,8 @@ function App() {
       ====================================================== */}
 
       <header className="semaphore-header">
+
+        {/* Animated top shimmer */}
 
         <div className="header-top-shimmer" />
 
@@ -267,7 +271,7 @@ function App() {
       </main>
 
       {/* =====================================================
-          EVENTS PAGE
+          EVENTS
       ====================================================== */}
 
       <section id="events">
@@ -319,5 +323,4 @@ function App() {
     </div>
   )
 }
-
 export default App
