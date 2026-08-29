@@ -1,377 +1,458 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Events.css'
 
-const events = [
+const targetDate = new Date(
+  '2026-09-17T00:00:00+05:30'
+).getTime()
+
+const eventDays = [
   {
-    id: 1,
-    title: 'Semaphore 2026',
-    category: 'Flagship',
-    date: '15 September 2026',
-    time: '9:00 AM',
-    venue: 'NMAMIT Campus',
+    id: 'day1',
+    label: 'DAY 01',
+    date: '17',
+    month: 'SEP',
+    title: 'Opening Protocol',
     description:
-      'The flagship technical and cultural experience bringing participants together for an exciting campus-wide event.',
-    featured: true,
+      'The first day of Semaphore 2K26 brings together participants for a full day of technical challenges, competitions and experiences.',
   },
   {
-    id: 2,
-    title: 'Tech Innovation Challenge',
-    category: 'Technical',
-    date: '16 September 2026',
-    time: '10:00 AM',
-    venue: 'Innovation Centre',
+    id: 'day2',
+    label: 'DAY 02',
+    date: '18',
+    month: 'SEP',
+    title: 'Final Transmission',
     description:
-      'A challenge focused on creativity, problem solving and innovative technology solutions.',
-    featured: false,
-  },
-  {
-    id: 3,
-    title: 'Cultural Showcase',
-    category: 'Cultural',
-    date: '16 September 2026',
-    time: '5:00 PM',
-    venue: 'Main Auditorium',
-    description:
-      'Experience performances, creativity and talent from participants across different institutions.',
-    featured: false,
-  },
-  {
-    id: 4,
-    title: 'Gaming Arena',
-    category: 'Gaming',
-    date: '17 September 2026',
-    time: '11:00 AM',
-    venue: 'Student Activity Centre',
-    description:
-      'Compete with fellow participants in a high-energy gaming experience.',
-    featured: false,
-  },
-  {
-    id: 5,
-    title: 'Industry Connect',
-    category: 'Workshop',
-    date: '17 September 2026',
-    time: '2:00 PM',
-    venue: 'Seminar Hall',
-    description:
-      'Connect with industry professionals and explore opportunities, insights and emerging technologies.',
-    featured: false,
+      'The second day continues the competition with advanced challenges, finals, closing activities and the culmination of Semaphore 2K26.',
   },
 ]
 
-const categories = [
-  'All',
-  'Flagship',
-  'Technical',
-  'Cultural',
-  'Gaming',
-  'Workshop',
+const eventCategories = [
+  {
+    icon: '⌘',
+    title: 'Technical Events',
+    description:
+      'Challenge your programming, problem-solving and technical skills.',
+  },
+  {
+    icon: '◈',
+    title: 'Creative Events',
+    description:
+      'Showcase creativity, ideas and digital expression.',
+  },
+  {
+    icon: '⚡',
+    title: 'Competitive Events',
+    description:
+      'Compete with participants and push your skills to the next level.',
+  },
 ]
 
-function Events() {
-  const [activeCategory, setActiveCategory] = useState('All')
+function getTimeLeft() {
+  const difference = targetDate - Date.now()
 
-  const filteredEvents = useMemo(() => {
-    if (activeCategory === 'All') {
-      return events
+  if (difference <= 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
     }
+  }
 
-    return events.filter(
-      (event) => event.category === activeCategory
-    )
-  }, [activeCategory])
+  return {
+    days: Math.floor(
+      difference / (1000 * 60 * 60 * 24)
+    ),
 
-  const featuredEvent = events.find(
-    (event) => event.featured
+    hours: Math.floor(
+      (difference / (1000 * 60 * 60)) % 24
+    ),
+
+    minutes: Math.floor(
+      (difference / (1000 * 60)) % 60
+    ),
+
+    seconds: Math.floor(
+      (difference / 1000) % 60
+    ),
+  }
+}
+
+function AppCountdown() {
+  const [timeLeft, setTimeLeft] = useState(
+    getTimeLeft()
   )
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeLeft())
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <main className="events-page">
+    <div className="events-countdown">
 
-      {/* =====================================================
-          EVENTS HERO
-      ====================================================== */}
+      <div className="countdown-heading">
+        <span />
+        COUNTDOWN TO SEMAPHORE 2K26
+        <span />
+      </div>
 
-      <section className="events-hero">
+      <div className="countdown-grid">
 
-        <div className="events-hero-content">
+        <div className="countdown-item">
+          <strong>
+            {String(timeLeft.days).padStart(2, '0')}
+          </strong>
 
-          <span className="events-eyebrow">
-            NITTE • SAMCA
+          <span>
+            DAYS
           </span>
+        </div>
 
-          <h1>
-            Discover
-            <span> What's Happening.</span>
-          </h1>
+        <div className="countdown-separator">
+          :
+        </div>
+
+        <div className="countdown-item">
+          <strong>
+            {String(timeLeft.hours).padStart(2, '0')}
+          </strong>
+
+          <span>
+            HOURS
+          </span>
+        </div>
+
+        <div className="countdown-separator">
+          :
+        </div>
+
+        <div className="countdown-item">
+          <strong>
+            {String(timeLeft.minutes).padStart(2, '0')}
+          </strong>
+
+          <span>
+            MINUTES
+          </span>
+        </div>
+
+        <div className="countdown-separator">
+          :
+        </div>
+
+        <div className="countdown-item">
+          <strong>
+            {String(timeLeft.seconds).padStart(2, '0')}
+          </strong>
+
+          <span>
+            SECONDS
+          </span>
+        </div>
+
+      </div>
+
+      <p className="countdown-date">
+        17 SEPTEMBER 2026
+      </p>
+
+    </div>
+  )
+}
+
+function Events() {
+  const [activeDay, setActiveDay] =
+    useState('day1')
+
+  const selectedDay =
+    eventDays.find(
+      (day) => day.id === activeDay
+    ) || eventDays[0]
+
+  return (
+    <section
+      className="events-section"
+      id="events"
+    >
+
+      {/* =================================================
+          ATMOSPHERIC BACKGROUND
+      ================================================== */}
+
+      <div
+        className="events-grid"
+        aria-hidden="true"
+      />
+
+      <div
+        className="events-glow events-glow-one"
+        aria-hidden="true"
+      />
+
+      <div
+        className="events-glow events-glow-two"
+        aria-hidden="true"
+      />
+
+      {/* =================================================
+          MAIN CONTAINER
+      ================================================== */}
+
+      <div className="events-container">
+
+        {/* =================================================
+            SECTION HEADER
+        ================================================== */}
+
+        <div className="events-heading">
+
+          <div className="events-eyebrow">
+
+            <span />
+
+            SEMAPHORE 2K26
+
+            <span />
+
+          </div>
+
+          <h2>
+            Enter the
+            <strong>
+              event zone.
+            </strong>
+          </h2>
 
           <p>
-            Explore upcoming events, workshops, competitions
-            and experiences happening at NMAMIT.
+            Two days. Multiple challenges.
+            One unforgettable experience.
           </p>
 
-          <div className="events-hero-actions">
-            <a
-              href="#upcoming-events"
-              className="events-primary-button"
-            >
-              Explore Events
-              <span>→</span>
-            </a>
+          {/* Event dates */}
 
-            <a
-              href="#featured-event"
-              className="events-secondary-button"
+          <div className="events-date">
+
+            <span>
+              17
+            </span>
+
+            <i>
+              —
+            </i>
+
+            <span>
+              18
+            </span>
+
+            <span className="events-date-month">
+              SEPTEMBER
+            </span>
+
+          </div>
+
+          {/* =================================================
+              COUNTDOWN
+          ================================================== */}
+
+          <AppCountdown />
+
+        </div>
+
+        {/* =================================================
+            DAY SELECTOR
+        ================================================== */}
+
+        <div className="events-day-selector">
+
+          {eventDays.map((day) => (
+
+            <button
+              key={day.id}
+              type="button"
+              className={`event-day-button ${
+                activeDay === day.id
+                  ? 'active'
+                  : ''
+              }`}
+              onClick={() =>
+                setActiveDay(day.id)
+              }
             >
-              Featured Event
-            </a>
+
+              <span className="event-day-label">
+                {day.label}
+              </span>
+
+              <strong>
+                {day.date}
+              </strong>
+
+              <small>
+                {day.month}
+              </small>
+
+            </button>
+
+          ))}
+
+        </div>
+
+        {/* =================================================
+            ACTIVE DAY
+        ================================================== */}
+
+        <div className="active-event-day">
+
+          <div className="active-day-number">
+
+            <span>
+              {selectedDay.date}
+            </span>
+
+            <small>
+              {selectedDay.month}
+            </small>
+
+          </div>
+
+          <div className="active-day-copy">
+
+            <span>
+              {selectedDay.label}
+            </span>
+
+            <h3>
+              {selectedDay.title}
+            </h3>
+
+            <p>
+              {selectedDay.description}
+            </p>
+
+          </div>
+
+          <div className="active-day-status">
+
+            <span className="status-dot" />
+
+            EVENT DAY
+
           </div>
 
         </div>
 
-        <div className="events-hero-visual">
+        {/* =================================================
+            EVENT CATEGORIES
+        ================================================== */}
 
-          <div className="hero-orbit orbit-one" />
-          <div className="hero-orbit orbit-two" />
+        <div className="events-subheading">
 
-          <div className="hero-event-card">
+          <span>
+            EXPLORE
+          </span>
 
-            <span className="hero-card-label">
-              NEXT EVENT
+          <h3>
+            Choose your challenge.
+          </h3>
+
+        </div>
+
+        <div className="event-category-grid">
+
+          {eventCategories.map(
+            (category, index) => (
+
+              <article
+                className="event-category-card"
+                key={category.title}
+              >
+
+                <div className="event-card-number">
+                  0{index + 1}
+                </div>
+
+                <div className="event-card-icon">
+                  {category.icon}
+                </div>
+
+                <h4>
+                  {category.title}
+                </h4>
+
+                <p>
+                  {category.description}
+                </p>
+
+                <button
+                  type="button"
+                  className="event-explore-button"
+                >
+                  Explore
+
+                  <span>
+                    →
+                  </span>
+
+                </button>
+
+              </article>
+
+            )
+          )}
+
+        </div>
+
+        {/* =================================================
+            EVENT INFORMATION
+        ================================================== */}
+
+        <div className="events-info-strip">
+
+          <div>
+
+            <span>
+              EVENT
             </span>
 
             <strong>
-              {featuredEvent.title}
+              SEMAPHORE 2K26
             </strong>
 
-            <div className="hero-card-date">
-              <span>
-                {featuredEvent.date}
-              </span>
-
-              <span>
-                {featuredEvent.time}
-              </span>
-            </div>
-
           </div>
-
-        </div>
-
-      </section>
-
-      {/* =====================================================
-          COUNTDOWN / HIGHLIGHT
-      ====================================================== */}
-
-      <section
-        className="events-highlight"
-        id="featured-event"
-      >
-
-        <div className="highlight-copy">
-
-          <span className="section-kicker">
-            DON'T MISS IT
-          </span>
-
-          <h2>
-            {featuredEvent.title}
-          </h2>
-
-          <p>
-            {featuredEvent.description}
-          </p>
-
-        </div>
-
-        <div className="countdown-panel">
-
-          <span className="countdown-label">
-            EVENT HIGHLIGHT
-          </span>
-
-          <div className="countdown-values">
-
-            <div>
-              <strong>15</strong>
-              <small>SEP</small>
-            </div>
-
-            <div>
-              <strong>09</strong>
-              <small>AM</small>
-            </div>
-
-            <div>
-              <strong>01</strong>
-              <small>DAY</small>
-            </div>
-
-          </div>
-
-          <span className="countdown-note">
-            Save the date
-          </span>
-
-        </div>
-
-      </section>
-
-      {/* =====================================================
-          UPCOMING EVENTS
-      ====================================================== */}
-
-      <section
-        className="upcoming-events"
-        id="upcoming-events"
-      >
-
-        <div className="events-section-heading">
 
           <div>
-            <span className="section-kicker">
-              THE SCHEDULE
+
+            <span>
+              DATES
             </span>
 
-            <h2>
-              Upcoming Events
-            </h2>
+            <strong>
+              17 — 18 SEPTEMBER
+            </strong>
+
           </div>
 
-          <p>
-            Find something that interests you.
-          </p>
+          <div>
 
-        </div>
+            <span>
+              VENUE
+            </span>
 
-        {/* CATEGORY FILTER */}
+            <strong>
+              NMAMIT, NITTE
+            </strong>
 
-        <div className="event-filters">
-
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              className={
-                activeCategory === category
-                  ? 'active'
-                  : ''
-              }
-              onClick={() =>
-                setActiveCategory(category)
-              }
-            >
-              {category}
-            </button>
-          ))}
-
-        </div>
-
-        {/* EVENT GRID */}
-
-        <div className="events-grid">
-
-          {filteredEvents.map((event) => (
-            <article
-              key={event.id}
-              className={`event-card ${
-                event.featured ? 'featured' : ''
-              }`}
-            >
-
-              <div className="event-card-top">
-
-                <span className="event-category">
-                  {event.category}
-                </span>
-
-                <span className="event-number">
-                  {String(event.id).padStart(2, '0')}
-                </span>
-
-              </div>
-
-              <div className="event-date-block">
-
-                <strong>
-                  {event.date}
-                </strong>
-
-                <span>
-                  {event.time}
-                </span>
-
-              </div>
-
-              <h3>
-                {event.title}
-              </h3>
-
-              <p>
-                {event.description}
-              </p>
-
-              <div className="event-card-footer">
-
-                <span>
-                  {event.venue}
-                </span>
-
-                <button type="button">
-                  View Event
-                  <span>→</span>
-                </button>
-
-              </div>
-
-            </article>
-          ))}
-
-        </div>
-
-        {filteredEvents.length === 0 && (
-          <div className="events-empty">
-            No events found in this category.
           </div>
-        )}
-
-      </section>
-
-      {/* =====================================================
-          EVENT CTA
-      ====================================================== */}
-
-      <section className="events-cta">
-
-        <div>
-
-          <span className="section-kicker">
-            STAY CONNECTED
-          </span>
-
-          <h2>
-            Be there when it happens.
-          </h2>
-
-          <p>
-            Keep an eye on the event schedule for updates,
-            announcements and important changes.
-          </p>
 
         </div>
 
-        <a
-          href="#upcoming-events"
-          className="events-primary-button"
-        >
-          View Schedule
-          <span>→</span>
-        </a>
+      </div>
 
-      </section>
-
-    </main>
+    </section>
   )
 }
 
