@@ -1,0 +1,1217 @@
+/* =========================================================
+   NMAMIT CAMPUS MAP
+========================================================= */
+
+.campus-map-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 24px 100px;
+  overflow: hidden;
+}
+
+.campus-map-container {
+  position: relative;
+  z-index: 2;
+  width: min(1380px, 100%);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   ATMOSPHERIC GLOW
+========================================================= */
+
+.campus-map-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .45;
+}
+
+.campus-map-glow-one {
+  width: 520px;
+  height: 520px;
+  left: -180px;
+  top: 220px;
+  background: rgba(0, 180, 210, .10);
+}
+
+.campus-map-glow-two {
+  width: 450px;
+  height: 450px;
+  right: -180px;
+  bottom: 120px;
+  background: rgba(0, 230, 255, .08);
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.campus-map-heading {
+  max-width: 760px;
+  margin: 0 auto 58px;
+  text-align: center;
+}
+
+.campus-map-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  margin-bottom: 20px;
+
+  color: rgba(79, 224, 248, .62);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .22em;
+}
+
+.campus-map-eyebrow span {
+  width: 42px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(77, 225, 249, .65)
+    );
+}
+
+.campus-map-eyebrow span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(77, 225, 249, .65),
+      transparent
+    );
+}
+
+.campus-map-heading h2 {
+  margin: 0;
+
+  color: rgba(232, 250, 253, .92);
+
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: 500;
+}
+
+.campus-map-heading h2 strong {
+  color: #51e7ff;
+  font-weight: 700;
+
+  text-shadow:
+    0 0 28px rgba(60, 220, 247, .22);
+}
+
+.campus-map-heading p {
+  max-width: 620px;
+  margin: 25px auto 0;
+
+  color: rgba(169, 212, 221, .58);
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.campus-map-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.8fr)
+    minmax(300px, .75fr);
+
+  gap: 20px;
+
+  align-items: stretch;
+}
+
+/* =========================================================
+   MAP CARD
+========================================================= */
+
+.campus-map-card,
+.facility-detail {
+  position: relative;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(76, 220, 245, .17);
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4, 38, 51, .78),
+      rgba(2, 20, 31, .84)
+    );
+
+  box-shadow:
+    inset 0 1px
+    rgba(225, 251, 255, .045),
+    0 30px 80px
+    rgba(0, 0, 0, .20);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.map-card-top {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  border-bottom:
+    1px solid
+    rgba(84, 218, 239, .10);
+
+  background:
+    rgba(3, 31, 43, .56);
+}
+
+.map-title-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color:
+    rgba(94, 224, 247, .68);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .13em;
+}
+
+.map-live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #55e7ff;
+
+  box-shadow:
+    0 0 13px
+    rgba(71, 226, 252, .85);
+}
+
+.map-coordinates {
+  color:
+    rgba(127, 194, 205, .42);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+/* =========================================================
+   REAL MAP
+========================================================= */
+
+.real-map-container {
+  position: relative;
+
+  height: 560px;
+
+  overflow: hidden;
+
+  background: #dbe4e5;
+}
+
+.real-campus-map {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border: 0;
+
+  filter:
+    saturate(.70)
+    contrast(1.03)
+    brightness(.82)
+    hue-rotate(155deg);
+}
+
+/*
+  This is deliberately subtle.
+  The actual Google map remains visible underneath.
+*/
+
+.map-atmosphere {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 34, 46, .18),
+      transparent 32%,
+      rgba(0, 18, 27, .12)
+    );
+
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================
+   SELECTED LOCATION BADGE
+========================================================= */
+
+.selected-map-badge {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 18px;
+  top: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  max-width: min(360px, calc(100% - 90px));
+
+  padding: 11px 14px;
+
+  border:
+    1px solid
+    rgba(80, 226, 249, .25);
+
+  border-radius: 12px;
+
+  background:
+    rgba(2, 25, 36, .84);
+
+  box-shadow:
+    0 14px 35px
+    rgba(0, 0, 0, .26);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  pointer-events: none;
+}
+
+.selected-map-pulse {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #5ceaff;
+
+  box-shadow:
+    0 0 15px
+    rgba(82, 230, 255, .9);
+}
+
+.selected-map-badge div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.selected-map-badge small {
+  color:
+    rgba(91, 222, 246, .52);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .12em;
+}
+
+.selected-map-badge strong {
+  overflow: hidden;
+
+  color:
+    rgba(230, 251, 255, .88);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   COMPASS
+========================================================= */
+
+.map-compass {
+  position: absolute;
+
+  z-index: 10;
+
+  top: 18px;
+  right: 18px;
+
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(67, 221, 247, .25);
+
+  border-radius: 50%;
+
+  background:
+    rgba(1, 24, 35, .78);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  pointer-events: none;
+}
+
+.map-compass small {
+  color:
+    rgba(88, 226, 248, .62);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+}
+
+.map-compass strong {
+  color: #63eaff;
+  font-size: 10px;
+}
+
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
+.map-reset {
+  position: absolute;
+
+  z-index: 10;
+
+  right: 18px;
+  bottom: 18px;
+
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 14px;
+
+  border:
+    1px solid
+    rgba(76, 220, 246, .25);
+
+  border-radius: 9px;
+
+  color:
+    rgba(218, 249, 253, .78);
+
+  background:
+    rgba(1, 25, 36, .84);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .08em;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    .25s ease;
+}
+
+.map-reset span {
+  font-size: 15px;
+}
+
+.map-reset:hover {
+  color: #061820;
+
+  background: #5ceaff;
+
+  border-color: #5ceaff;
+}
+
+/* =========================================================
+   MAP FOOTER
+========================================================= */
+
+.map-card-bottom {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 22px;
+
+  border-top:
+    1px solid
+    rgba(76, 218, 240, .10);
+
+  background:
+    rgba(2, 27, 38, .64);
+}
+
+.map-card-bottom > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color:
+    rgba(80, 220, 245, .46);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .1em;
+}
+
+.map-card-bottom > span i {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #4ddff7;
+}
+
+.map-card-bottom a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color:
+    rgba(196, 239, 246, .55);
+
+  text-decoration: none;
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .08em;
+
+  transition: .25s ease;
+}
+
+.map-card-bottom a strong {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.map-card-bottom a:hover {
+  color: #5eeaff;
+}
+
+/* =========================================================
+   FACILITY DETAIL
+========================================================= */
+
+.facility-detail {
+  min-height: 690px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(29, 190, 220, .075),
+      transparent 38%
+    ),
+    linear-gradient(
+      160deg,
+      rgba(5, 40, 53, .82),
+      rgba(2, 21, 32, .92)
+    );
+}
+
+.facility-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color:
+    rgba(78, 218, 244, .46);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .13em;
+}
+
+.facility-status {
+  padding: 8px 11px;
+
+  border:
+    1px solid
+    rgba(78, 219, 244, .17);
+
+  border-radius: 8px;
+
+  color:
+    rgba(103, 227, 249, .66);
+
+  background:
+    rgba(60, 212, 237, .025);
+}
+
+.facility-icon-large {
+  width: 86px;
+  height: 86px;
+
+  margin-top: 78px;
+  margin-bottom: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(70, 223, 246, .23);
+
+  border-radius: 24px;
+
+  color: #5deaff;
+
+  font-size: 32px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(42, 218, 242, .10),
+      rgba(5, 45, 58, .30)
+    );
+
+  box-shadow:
+    inset 0 1px
+    rgba(220, 250, 255, .05),
+    0 0 35px
+    rgba(46, 215, 240, .06);
+}
+
+.campus-icon {
+  font-family: 'DM Mono', monospace;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.facility-type {
+  color:
+    rgba(80, 220, 244, .48);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .17em;
+}
+
+.facility-detail h3 {
+  margin: 13px 0 14px;
+
+  color:
+    rgba(228, 250, 253, .90);
+
+  font-size: clamp(27px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  font-weight: 500;
+}
+
+.facility-detail p {
+  margin: 0;
+
+  color:
+    rgba(159, 205, 215, .58);
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.facility-divider {
+  height: 1px;
+
+  margin:
+    28px 0;
+
+  background:
+    rgba(76, 215, 239, .12);
+}
+
+.facility-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.facility-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.facility-meta span {
+  color:
+    rgba(78, 219, 244, .38);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .12em;
+}
+
+.facility-meta strong {
+  color:
+    rgba(214, 246, 250, .65);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .06em;
+}
+
+.facility-directions {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: auto;
+
+  padding: 0 17px;
+
+  border:
+    1px solid
+    rgba(71, 220, 245, .22);
+
+  border-radius: 11px;
+
+  color:
+    rgba(215, 247, 251, .64);
+
+  background:
+    rgba(48, 211, 237, .025);
+
+  text-decoration: none;
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .06em;
+
+  cursor: pointer;
+
+  transition: .25s ease;
+}
+
+button.facility-directions {
+  width: 100%;
+  font: inherit;
+}
+
+.facility-directions strong {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.facility-directions:hover {
+  color: #061820;
+
+  background: #5deaff;
+
+  border-color: #5deaff;
+}
+
+.reset-button {
+  border: 1px solid rgba(71, 220, 245, .22);
+}
+
+/* =========================================================
+   DIRECTORY
+========================================================= */
+
+.facilities-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-top: 72px;
+  margin-bottom: 25px;
+}
+
+.facilities-heading > div > span {
+  color:
+    rgba(78, 219, 244, .45);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.facilities-heading h3 {
+  margin: 8px 0 0;
+
+  color:
+    rgba(226, 250, 253, .82);
+
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.facilities-heading p {
+  max-width: 390px;
+  margin: 0;
+
+  color:
+    rgba(150, 202, 213, .47);
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FACILITY CARDS
+========================================================= */
+
+.facility-cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.facility-card {
+  position: relative;
+
+  min-height: 120px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    auto
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 18px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(74, 216, 240, .11);
+
+  border-radius: 15px;
+
+  color: inherit;
+
+  text-align: left;
+
+  background:
+    rgba(4, 34, 46, .44);
+
+  cursor: pointer;
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.facility-card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(74, 222, 246, .28);
+
+  background:
+    rgba(5, 42, 55, .62);
+}
+
+.facility-card.selected {
+  border-color:
+    rgba(78, 225, 248, .48);
+
+  background:
+    rgba(11, 59, 72, .62);
+
+  box-shadow:
+    inset 0 0 30px
+    rgba(62, 219, 242, .045);
+}
+
+.facility-card-number {
+  align-self: start;
+
+  color:
+    rgba(76, 218, 242, .32);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+}
+
+.facility-card-icon {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(72, 219, 242, .14);
+
+  border-radius: 10px;
+
+  color:
+    rgba(86, 224, 246, .72);
+
+  background:
+    rgba(54, 213, 238, .035);
+}
+
+.facility-card-copy {
+  min-width: 0;
+}
+
+.facility-card-copy span {
+  color:
+    rgba(76, 216, 239, .40);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .1em;
+}
+
+.facility-card-copy h4 {
+  margin: 6px 0 0;
+
+  color:
+    rgba(214, 246, 250, .72);
+
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.facility-card-arrow {
+  color:
+    rgba(77, 222, 246, .42);
+
+  font-size: 15px;
+}
+
+.facility-card.selected .facility-card-arrow {
+  color: #58eaff;
+
+  text-shadow:
+    0 0 14px
+    rgba(75, 228, 251, .65);
+}
+
+/* =========================================================
+   LOCATION STRIP
+========================================================= */
+
+.campus-location-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 18px;
+
+  padding: 15px 18px;
+
+  border:
+    1px solid
+    rgba(76, 220, 245, .11);
+
+  border-radius: 14px;
+
+  background:
+    rgba(4, 34, 46, .34);
+}
+
+.location-pulse {
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(80, 226, 247, .18);
+
+  border-radius: 50%;
+}
+
+.location-pulse span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #5beaff;
+
+  box-shadow:
+    0 0 14px
+    rgba(77, 228, 250, .8);
+}
+
+.location-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.location-copy span {
+  color:
+    rgba(80, 220, 244, .38);
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .13em;
+}
+
+.location-copy strong {
+  color:
+    rgba(215, 246, 250, .64);
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.campus-location-strip > a {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  border:
+    1px solid
+    rgba(76, 221, 246, .17);
+
+  border-radius: 9px;
+
+  color:
+    rgba(213, 246, 251, .55);
+
+  text-decoration: none;
+
+  font-family: 'DM Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .08em;
+
+  transition: .25s ease;
+}
+
+.campus-location-strip > a:hover {
+  color: #061820;
+  background: #5deaff;
+  border-color: #5deaff;
+}
+
+.campus-location-strip > a span {
+  font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .campus-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .facility-detail {
+    min-height: auto;
+  }
+
+  .facility-icon-large {
+    margin-top: 35px;
+    margin-bottom: 25px;
+  }
+
+  .facility-directions {
+    margin-top: 30px;
+  }
+
+  .facility-cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+
+  .campus-map-section {
+    padding:
+      80px 14px;
+  }
+
+  .campus-map-heading {
+    margin-bottom: 35px;
+  }
+
+  .campus-map-heading h2 {
+    font-size: 39px;
+  }
+
+  .campus-map-heading p {
+    font-size: 13px;
+  }
+
+  .map-card-top {
+    min-height: 64px;
+    height: auto;
+
+    padding:
+      14px 15px;
+
+    gap: 12px;
+  }
+
+  .map-coordinates {
+    display: none;
+  }
+
+  .real-map-container {
+    height: 430px;
+  }
+
+  .facility-detail {
+    padding: 24px;
+  }
+
+  .facility-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facilities-heading {
+    display: block;
+  }
+
+  .facilities-heading p {
+    margin-top: 10px;
+  }
+
+  .campus-location-strip {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .campus-location-strip > a {
+    width: 100%;
+    justify-content: center;
+    margin-left: 42px;
+  }
+}
+
+@media (max-width: 430px) {
+
+  .campus-map-eyebrow {
+    font-size: 8px;
+    gap: 8px;
+  }
+
+  .campus-map-eyebrow span {
+    width: 25px;
+  }
+
+  .campus-map-heading h2 {
+    font-size: 34px;
+  }
+
+  .real-map-container {
+    height: 360px;
+  }
+
+  .selected-map-badge {
+    left: 10px;
+    top: 10px;
+  }
+
+  .map-compass {
+    top: 10px;
+    right: 10px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .map-reset {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .map-card-bottom {
+    padding:
+      0 14px;
+  }
+
+  .map-card-bottom a {
+    font-size: 6px;
+  }
+
+  .facility-card {
+    grid-template-columns:
+      auto
+      auto
+      minmax(0, 1fr)
+      auto;
+
+    gap: 9px;
+
+    padding: 14px;
+  }
+
+  .facility-card-copy h4 {
+    font-size: 11px;
+  }
+
+}
