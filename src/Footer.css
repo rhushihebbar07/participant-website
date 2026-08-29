@@ -1,0 +1,429 @@
+.semaphore-footer {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+
+  padding: 85px 24px 28px;
+
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(47, 209, 198, 0.07),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(19, 119, 157, 0.08),
+      transparent 32%
+    ),
+    #02161c;
+
+  border-top: 1px solid rgba(119, 237, 226, 0.12);
+}
+
+.footer-container {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================
+   GLOW
+========================================= */
+
+.footer-glow {
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  pointer-events: none;
+
+  opacity: 0.12;
+}
+
+.footer-glow-one {
+  left: -180px;
+  top: -120px;
+
+  background: rgba(60, 224, 211, 0.5);
+}
+
+.footer-glow-two {
+  right: -180px;
+  bottom: -160px;
+
+  background: rgba(27, 139, 175, 0.5);
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+.footer-main {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(180px, 0.7fr)
+    minmax(240px, 0.9fr);
+
+  gap: 70px;
+}
+
+/* =========================================
+   BRAND
+========================================= */
+
+.footer-wordmark {
+  display: inline-block;
+
+  color: #effffc;
+
+  font-size: clamp(30px, 4vw, 48px);
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  line-height: 1;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-wordmark:hover {
+  color: #8deee3;
+
+  transform: translateY(-2px);
+}
+
+.footer-brand p {
+  max-width: 390px;
+
+  margin: 20px 0 24px;
+
+  color: rgba(218, 246, 243, 0.55);
+
+  font-size: 13px;
+
+  line-height: 1.8;
+}
+
+.footer-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(126, 237, 226, 0.65);
+}
+
+.footer-status span {
+  color: #76e9dd;
+
+  font-size: 10px;
+}
+
+/* =========================================
+   LABEL
+========================================= */
+
+.footer-label {
+  display: block;
+
+  margin-bottom: 20px;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.17em;
+
+  color: rgba(124, 235, 225, 0.56);
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+.footer-links nav {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+.footer-links a {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 150px;
+
+  color: rgba(232, 253, 250, 0.68);
+
+  font-size: 13px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-links a span {
+  color: rgba(119, 237, 226, 0.6);
+
+  transition:
+    transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #effffc;
+
+  transform: translateX(3px);
+}
+
+.footer-links a:hover span {
+  transform: translateX(4px);
+}
+
+/* =========================================
+   MAIN WEBSITE
+========================================= */
+
+.footer-website {
+  padding: 25px;
+
+  border: 1px solid rgba(119, 237, 226, 0.13);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(71, 218, 207, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+}
+
+.footer-website h3 {
+  margin: 0;
+
+  color: #effffc;
+
+  font-size: 21px;
+
+  letter-spacing: -0.02em;
+}
+
+.footer-website p {
+  margin: 12px 0 20px;
+
+  color: rgba(216, 244, 241, 0.53);
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+.footer-main-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 11px 16px;
+
+  border: 1px solid rgba(119, 237, 226, 0.2);
+
+  border-radius: 999px;
+
+  color: rgba(236, 255, 252, 0.82);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.footer-main-link:hover {
+  transform: translateY(-2px);
+
+  background: rgba(78, 224, 212, 0.07);
+
+  border-color: rgba(119, 237, 226, 0.4);
+}
+
+.footer-main-link span {
+  color: #87eee3;
+
+  font-size: 16px;
+}
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.footer-divider {
+  height: 1px;
+
+  margin: 60px 0 24px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(119, 237, 226, 0.2),
+      rgba(119, 237, 226, 0.04),
+      transparent
+    );
+}
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.footer-bottom {
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.footer-institutions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-size: 11px;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(234, 253, 250, 0.65);
+}
+
+.footer-institutions span {
+  color: rgba(119, 237, 226, 0.35);
+}
+
+.footer-bottom p {
+  margin: 0;
+
+  color: rgba(208, 239, 236, 0.38);
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+.footer-back-top {
+  justify-self: end;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: rgba(216, 247, 244, 0.55);
+
+  font-size: 10px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-back-top span {
+  color: #83ebe0;
+
+  font-size: 15px;
+}
+
+.footer-back-top:hover {
+  color: #effffc;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 45px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-website {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .semaphore-footer {
+    padding: 65px 18px 25px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+
+    gap: 38px;
+  }
+
+  .footer-brand,
+  .footer-website {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    grid-template-columns: 1fr;
+
+    justify-items: start;
+
+    gap: 15px;
+  }
+
+  .footer-bottom p {
+    text-align: left;
+  }
+
+  .footer-back-top {
+    justify-self: start;
+  }
+
+  .footer-divider {
+    margin-top: 45px;
+  }
+}

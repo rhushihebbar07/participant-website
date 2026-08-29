@@ -1,0 +1,1351 @@
+/* =========================================================
+   SEMAPHORE 2K26 — EVENTS
+   Underwater / Cyber-Ocean Visual System
+========================================================= */
+
+.events-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  min-height: 100vh;
+  padding: 120px 24px 140px;
+
+  color: #effffc;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(41, 214, 201, 0.14),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 22, 26, 0.92),
+      rgba(1, 15, 22, 0.98)
+    );
+
+  scroll-margin-top: 100px;
+}
+
+
+/* =========================================================
+   ATMOSPHERIC GRID
+========================================================= */
+
+.events-grid {
+  position: absolute;
+  inset: 0;
+
+  z-index: -4;
+
+  opacity: 0.18;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(95, 240, 224, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(95, 240, 224, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 70px 70px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 18%,
+      black 80%,
+      transparent
+    );
+
+  animation: eventsGridMove 18s linear infinite;
+}
+
+@keyframes eventsGridMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(70px);
+  }
+}
+
+
+/* =========================================================
+   GLOW EFFECTS
+========================================================= */
+
+.events-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(80px);
+
+  opacity: 0.18;
+
+  z-index: -3;
+}
+
+.events-glow-one {
+  top: 10%;
+  left: -240px;
+
+  background: #13d8ca;
+
+  animation:
+    eventsGlowOne 9s ease-in-out infinite;
+}
+
+.events-glow-two {
+  right: -250px;
+  bottom: 8%;
+
+  background: #147b9c;
+
+  animation:
+    eventsGlowTwo 11s ease-in-out infinite;
+}
+
+@keyframes eventsGlowOne {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes eventsGlowTwo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-60px);
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.events-container {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.events-heading {
+  max-width: 850px;
+
+  margin: 0 auto 55px;
+
+  text-align: center;
+}
+
+.events-eyebrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+
+  color: #66eee0;
+
+  font-family:
+    'DM Mono',
+    'Courier New',
+    monospace;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.28em;
+}
+
+.events-eyebrow span {
+  width: 38px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #66eee0
+    );
+}
+
+.events-eyebrow span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      #66eee0,
+      transparent
+    );
+}
+
+.events-heading h2 {
+  margin: 0;
+
+  color: #f1fffd;
+
+  font-family:
+    Manrope,
+    sans-serif;
+
+  font-size:
+    clamp(42px, 7vw, 82px);
+
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.055em;
+}
+
+.events-heading h2 strong {
+  display: block;
+
+  color: #72eee2;
+
+  font-weight: 800;
+
+  text-shadow:
+    0 0 30px
+    rgba(65, 239, 220, 0.2);
+}
+
+.events-heading p {
+  max-width: 570px;
+
+  margin: 28px auto 0;
+
+  color:
+    rgba(224, 252, 248, 0.66);
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   EVENT DATE
+========================================================= */
+
+.events-date {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 30px;
+
+  flex-wrap: wrap;
+}
+
+.events-date span {
+  color: #9ff8ee;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+.events-date i {
+  color:
+    rgba(159, 248, 238, 0.35);
+
+  font-style: normal;
+}
+
+.events-date .events-date-month {
+  width: 100%;
+
+  margin-top: -4px;
+
+  color:
+    rgba(183, 246, 239, 0.45);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.3em;
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.events-countdown {
+  width: min(760px, 100%);
+
+  margin: 38px auto 0;
+
+  padding: 25px 28px 24px;
+
+  border: 1px solid
+    rgba(105, 239, 224, 0.18);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 60, 68, 0.62),
+      rgba(2, 25, 32, 0.78)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.025),
+    0 20px 60px
+      rgba(0, 0, 0, 0.2);
+}
+
+.countdown-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+
+  color: #70e9dc;
+
+  font-family:
+    'DM Mono',
+    'Courier New',
+    monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.countdown-heading span {
+  width: 25px;
+  height: 1px;
+
+  background:
+    rgba(112, 233, 220, 0.35);
+}
+
+.countdown-grid {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.countdown-item {
+  min-width: 115px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.countdown-item strong {
+  color: #f0fffd;
+
+  font-family:
+    'DM Mono',
+    'Courier New',
+    monospace;
+
+  font-size:
+    clamp(30px, 5vw, 46px);
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  letter-spacing: -0.04em;
+
+  text-shadow:
+    0 0 24px
+    rgba(94, 232, 216, 0.16);
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+.countdown-item span {
+  color:
+    rgba(191, 247, 241, 0.46);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.17em;
+}
+
+.countdown-separator {
+  margin: 0 4px 17px;
+
+  color:
+    rgba(112, 233, 220, 0.35);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 27px;
+
+  line-height: 1;
+}
+
+.countdown-date {
+  margin: 20px 0 0;
+
+  color:
+    rgba(224, 252, 248, 0.42);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   DAY SELECTOR
+========================================================= */
+
+.events-day-selector {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+
+  width: min(650px, 100%);
+
+  margin: 0 auto 35px;
+}
+
+.event-day-button {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  align-items: center;
+
+  gap: 18px;
+
+  min-height: 92px;
+
+  padding: 18px 22px;
+
+  border: 1px solid
+    rgba(139, 244, 232, 0.14);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17, 66, 73, 0.65),
+      rgba(3, 26, 34, 0.7)
+    );
+
+  color: #effffc;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.event-day-button:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(112, 239, 225, 0.4);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.25);
+}
+
+.event-day-button.active {
+  border-color:
+    rgba(105, 239, 224, 0.72);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 103, 108, 0.7),
+      rgba(4, 38, 46, 0.86)
+    );
+
+  box-shadow:
+    0 0 0 1px
+      rgba(105, 239, 224, 0.1),
+    0 18px 50px
+      rgba(20, 188, 177, 0.12);
+}
+
+.event-day-button.active::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 22px;
+  right: 22px;
+
+  height: 2px;
+
+  border-radius: 99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #71eee0,
+      transparent
+    );
+}
+
+.event-day-label {
+  color:
+    rgba(207, 250, 245, 0.6);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.16em;
+}
+
+.event-day-button strong {
+  color: #effffc;
+
+  font-family:
+    Manrope,
+    sans-serif;
+
+  font-size: 35px;
+
+  line-height: 1;
+}
+
+.event-day-button small {
+  color: #78ddd2;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 0.15em;
+}
+
+
+/* =========================================================
+   ACTIVE EVENT DAY
+========================================================= */
+
+.active-event-day {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    130px 1fr auto;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 34px;
+
+  margin-bottom: 90px;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgba(125, 241, 227, 0.15);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(10, 56, 64, 0.82),
+      rgba(2, 24, 32, 0.9)
+    );
+
+  box-shadow:
+    0 30px 90px
+    rgba(0, 0, 0, 0.25);
+}
+
+.active-event-day::after {
+  content: '';
+
+  position: absolute;
+
+  width: 250px;
+  height: 250px;
+
+  right: -120px;
+  top: -120px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(87, 234, 218, 0.17),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+.active-day-number {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 110px;
+
+  border: 1px solid
+    rgba(118, 239, 226, 0.22);
+
+  border-radius: 18px;
+
+  background:
+    rgba(5, 38, 46, 0.75);
+}
+
+.active-day-number span {
+  color: #91f5e9;
+
+  font-size: 48px;
+
+  line-height: 0.9;
+
+  font-weight: 800;
+
+  letter-spacing: -0.06em;
+}
+
+.active-day-number small {
+  margin-top: 9px;
+
+  color:
+    rgba(224, 255, 250, 0.55);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.18em;
+}
+
+.active-day-copy > span {
+  color: #65e5d8;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+}
+
+.active-day-copy h3 {
+  margin: 8px 0 10px;
+
+  color: #f3fffd;
+
+  font-size: 30px;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
+}
+
+.active-day-copy p {
+  max-width: 680px;
+
+  margin: 0;
+
+  color:
+    rgba(224, 252, 248, 0.62);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.active-day-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  align-self: start;
+
+  padding: 9px 12px;
+
+  border: 1px solid
+    rgba(106, 236, 220, 0.16);
+
+  border-radius: 99px;
+
+  color:
+    rgba(213, 255, 249, 0.6);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.14em;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #69eadb;
+
+  box-shadow:
+    0 0 12px
+    rgba(105, 234, 219, 0.8);
+
+  animation:
+    statusPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+
+/* =========================================================
+   SUBHEADING
+========================================================= */
+
+.events-subheading {
+  margin-bottom: 30px;
+}
+
+.events-subheading > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #5fe2d5;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.22em;
+}
+
+.events-subheading h3 {
+  margin: 0;
+
+  color: #f0fffd;
+
+  font-size: 32px;
+
+  letter-spacing: -0.04em;
+}
+
+
+/* =========================================================
+   EVENT CATEGORY GRID
+========================================================= */
+
+.event-category-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.event-category-card {
+  position: relative;
+
+  min-height: 290px;
+
+  padding: 30px;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgba(140, 239, 229, 0.12);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 51, 59, 0.7),
+      rgba(2, 22, 30, 0.82)
+    );
+
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.event-category-card::before {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(94, 233, 220, 0.45),
+      transparent
+    );
+
+  transform:
+    scaleX(0.25);
+
+  transition:
+    transform 300ms ease;
+}
+
+.event-category-card:hover {
+  transform: translateY(-8px);
+
+  border-color:
+    rgba(106, 237, 223, 0.35);
+
+  box-shadow:
+    0 25px 60px
+    rgba(0, 0, 0, 0.28);
+}
+
+.event-category-card:hover::before {
+  transform:
+    scaleX(1);
+}
+
+.event-card-number {
+  position: absolute;
+
+  top: 20px;
+  right: 22px;
+
+  color:
+    rgba(151, 243, 233, 0.2);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 11px;
+
+  letter-spacing: 0.12em;
+}
+
+.event-card-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 28px;
+
+  border: 1px solid
+    rgba(103, 237, 222, 0.2);
+
+  border-radius: 14px;
+
+  background:
+    rgba(78, 218, 204, 0.06);
+
+  color: #76eee0;
+
+  font-size: 22px;
+}
+
+.event-category-card h4 {
+  margin: 0 0 12px;
+
+  color: #effffc;
+
+  font-size: 21px;
+
+  letter-spacing: -0.025em;
+}
+
+.event-category-card p {
+  max-width: 300px;
+
+  margin: 0;
+
+  color:
+    rgba(222, 251, 247, 0.56);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+.event-explore-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 28px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #76eade;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  cursor: pointer;
+
+  transition:
+    gap 200ms ease,
+    color 200ms ease;
+}
+
+.event-explore-button span {
+  font-size: 15px;
+}
+
+.event-explore-button:hover {
+  gap: 18px;
+
+  color: #b1fff6;
+}
+
+
+/* =========================================================
+   INFORMATION STRIP
+========================================================= */
+
+.events-info-strip {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  margin-top: 70px;
+
+  border-top: 1px solid
+    rgba(138, 238, 228, 0.12);
+
+  border-bottom: 1px solid
+    rgba(138, 238, 228, 0.12);
+}
+
+.events-info-strip > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  padding: 25px 24px;
+}
+
+.events-info-strip > div + div {
+  border-left: 1px solid
+    rgba(138, 238, 228, 0.12);
+}
+
+.events-info-strip span {
+  color:
+    rgba(180, 240, 234, 0.45);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.events-info-strip strong {
+  color: #bdfaf3;
+
+  font-size: 13px;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .events-section {
+    padding:
+      100px 20px 110px;
+  }
+
+  .active-event-day {
+    grid-template-columns:
+      100px 1fr;
+
+    gap: 24px;
+  }
+
+  .active-day-status {
+    grid-column: 2;
+
+    justify-self: start;
+  }
+
+  .event-category-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .event-category-card:last-child {
+    grid-column:
+      1 / -1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .events-section {
+    padding:
+      80px 16px 90px;
+  }
+
+  .events-heading {
+    margin-bottom: 40px;
+  }
+
+  .events-eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 0.2em;
+  }
+
+  .events-eyebrow span {
+    width: 25px;
+  }
+
+  .events-heading h2 {
+    font-size:
+      clamp(42px, 13vw, 62px);
+  }
+
+  .events-heading p {
+    margin-top: 20px;
+
+    font-size: 13px;
+  }
+
+  .events-date {
+    margin-top: 22px;
+  }
+
+  /* Countdown */
+
+  .events-countdown {
+    margin-top: 28px;
+
+    padding:
+      22px 10px;
+  }
+
+  .countdown-heading {
+    gap: 8px;
+
+    font-size: 7px;
+
+    letter-spacing: 0.14em;
+  }
+
+  .countdown-heading span {
+    width: 16px;
+  }
+
+  .countdown-item {
+    min-width: 0;
+
+    flex: 1;
+  }
+
+  .countdown-item strong {
+    font-size: 25px;
+  }
+
+  .countdown-item span {
+    font-size: 6px;
+
+    letter-spacing: 0.1em;
+  }
+
+  .countdown-separator {
+    margin:
+      0 1px 15px;
+
+    font-size: 18px;
+  }
+
+  .countdown-date {
+    font-size: 7px;
+  }
+
+  /* Day selector */
+
+  .events-day-selector {
+    gap: 10px;
+  }
+
+  .event-day-button {
+    grid-template-columns:
+      1fr auto;
+
+    gap: 5px;
+
+    min-height: 105px;
+
+    padding: 16px;
+  }
+
+  .event-day-label {
+    grid-column:
+      1 / -1;
+  }
+
+  .event-day-button strong {
+    font-size: 31px;
+  }
+
+  /* Active day */
+
+  .active-event-day {
+    grid-template-columns:
+      1fr;
+
+    padding: 24px;
+
+    margin-bottom: 65px;
+
+    gap: 20px;
+  }
+
+  .active-day-number {
+    width: 85px;
+    height: 85px;
+  }
+
+  .active-day-number span {
+    font-size: 37px;
+  }
+
+  .active-day-copy h3 {
+    font-size: 25px;
+  }
+
+  .active-day-status {
+    grid-column: auto;
+  }
+
+  /* Categories */
+
+  .events-subheading h3 {
+    font-size: 27px;
+  }
+
+  .event-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-category-card:last-child {
+    grid-column: auto;
+  }
+
+  .event-category-card {
+    min-height: 255px;
+
+    padding: 25px;
+  }
+
+  /* Info */
+
+  .events-info-strip {
+    grid-template-columns: 1fr;
+
+    margin-top: 55px;
+  }
+
+  .events-info-strip > div {
+    padding:
+      20px 18px;
+  }
+
+  .events-info-strip > div + div {
+    border-left: 0;
+
+    border-top: 1px solid
+      rgba(138, 238, 228, 0.12);
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .events-grid,
+  .events-glow,
+  .status-dot {
+    animation: none;
+  }
+
+  .event-day-button,
+  .event-category-card,
+  .event-explore-button {
+    transition: none;
+  }
+}

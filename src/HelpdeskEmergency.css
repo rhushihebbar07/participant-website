@@ -1,0 +1,803 @@
+/* =========================================================
+   HELP DESK & EMERGENCY
+========================================================= */
+
+.helpdesk-section {
+  position: relative;
+
+  width: 100%;
+
+  padding:
+    120px 24px 110px;
+
+  overflow: hidden;
+}
+
+.helpdesk-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1380px, 100%);
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   GLOW
+========================================================= */
+
+.helpdesk-glow {
+  position: absolute;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  filter: blur(90px);
+
+  opacity: .4;
+}
+
+.helpdesk-glow-one {
+  width: 500px;
+  height: 500px;
+
+  left: -220px;
+  top: 250px;
+
+  background:
+    rgba(0, 190, 220, .10);
+}
+
+.helpdesk-glow-two {
+  width: 420px;
+  height: 420px;
+
+  right: -160px;
+  bottom: 80px;
+
+  background:
+    rgba(0, 230, 255, .07);
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.helpdesk-heading {
+  max-width: 760px;
+
+  margin:
+    0 auto 55px;
+
+  text-align: center;
+}
+
+.helpdesk-eyebrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+
+  color:
+    rgba(78, 220, 244, .62);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 9px;
+
+  letter-spacing: .18em;
+}
+
+.helpdesk-eyebrow span {
+  width: 40px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(78, 220, 244, .6)
+    );
+}
+
+.helpdesk-eyebrow span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(78, 220, 244, .6),
+      transparent
+    );
+}
+
+.helpdesk-heading h2 {
+  margin: 0;
+
+  color:
+    rgba(231, 250, 253, .91);
+
+  font-size:
+    clamp(42px, 5vw, 70px);
+
+  line-height: .98;
+
+  letter-spacing: -.045em;
+
+  font-weight: 500;
+}
+
+.helpdesk-heading h2 strong {
+  color: #58e7ff;
+
+  font-weight: 700;
+
+  text-shadow:
+    0 0 28px
+    rgba(74, 224, 249, .20);
+}
+
+.helpdesk-heading p {
+  max-width: 600px;
+
+  margin:
+    25px auto 0;
+
+  color:
+    rgba(163, 207, 217, .57);
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+/* =========================================================
+   EMERGENCY BANNER
+========================================================= */
+
+.emergency-banner {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  min-height: 100px;
+
+  margin-bottom: 18px;
+
+  padding:
+    18px 20px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(255, 108, 108, .18);
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      100deg,
+      rgba(65, 30, 35, .40),
+      rgba(4, 32, 42, .48)
+    );
+
+  box-shadow:
+    inset 0 1px
+    rgba(255, 220, 220, .035);
+}
+
+.emergency-pulse {
+  width: 45px;
+  height: 45px;
+
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(255, 109, 109, .24);
+
+  border-radius: 50%;
+}
+
+.emergency-pulse span {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #ff7676;
+
+  box-shadow:
+    0 0 18px
+    rgba(255, 91, 91, .8);
+
+  animation:
+    emergencyPulse 1.8s infinite;
+}
+
+@keyframes emergencyPulse {
+
+  0%,
+  100% {
+    opacity: .65;
+    transform: scale(.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.emergency-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.emergency-copy span {
+  color:
+    rgba(255, 126, 126, .58);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  letter-spacing: .15em;
+}
+
+.emergency-copy strong {
+  color:
+    rgba(238, 246, 248, .70);
+
+  font-size: 12px;
+
+  line-height: 1.45;
+
+  font-weight: 500;
+}
+
+.emergency-call {
+  margin-left: auto;
+
+  min-width: 88px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  padding:
+    12px 17px;
+
+  border:
+    1px solid
+    rgba(255, 112, 112, .25);
+
+  border-radius: 11px;
+
+  color: #ffe9e9;
+
+  background:
+    rgba(255, 76, 76, .07);
+
+  text-decoration: none;
+
+  transition: .25s ease;
+}
+
+.emergency-call span {
+  font-family: 'DM Mono', monospace;
+
+  font-size: 18px;
+
+  font-weight: 600;
+}
+
+.emergency-call small {
+  color:
+    rgba(255, 145, 145, .55);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 6px;
+
+  letter-spacing: .12em;
+}
+
+.emergency-call:hover {
+  color: #fff;
+
+  background:
+    rgba(255, 76, 76, .18);
+
+  border-color:
+    rgba(255, 120, 120, .45);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   CONTACT GRID
+========================================================= */
+
+.helpdesk-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 11px;
+}
+
+.helpdesk-card {
+  position: relative;
+
+  min-height: 355px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 22px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(74, 216, 240, .12);
+
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(5, 39, 51, .68),
+      rgba(2, 24, 34, .74)
+    );
+
+  box-shadow:
+    inset 0 1px
+    rgba(226, 250, 253, .035);
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease;
+}
+
+.helpdesk-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(74, 222, 246, .27);
+}
+
+.helpdesk-card.emergency-card {
+  border-color:
+    rgba(255, 108, 108, .15);
+}
+
+.helpdesk-card.emergency-card:hover {
+  border-color:
+    rgba(255, 119, 119, .32);
+}
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.helpdesk-card-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.helpdesk-card-type {
+  color:
+    rgba(78, 219, 242, .47);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  letter-spacing: .13em;
+}
+
+.helpdesk-card-number {
+  color:
+    rgba(76, 216, 239, .25);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 8px;
+}
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.helpdesk-icon {
+  width: 58px;
+  height: 58px;
+
+  margin-top: 38px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(75, 220, 243, .17);
+
+  border-radius: 15px;
+
+  color: #59e4fb;
+
+  font-size: 23px;
+
+  background:
+    rgba(47, 211, 237, .04);
+}
+
+.emergency-card .helpdesk-icon {
+  color: #ff8585;
+
+  border-color:
+    rgba(255, 112, 112, .18);
+
+  background:
+    rgba(255, 86, 86, .035);
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.helpdesk-card h3 {
+  margin:
+    20px 0 11px;
+
+  color:
+    rgba(225, 249, 252, .82);
+
+  font-size: 19px;
+
+  line-height: 1.15;
+
+  letter-spacing: -.025em;
+
+  font-weight: 500;
+}
+
+.helpdesk-card p {
+  margin: 0;
+
+  color:
+    rgba(153, 201, 211, .53);
+
+  font-size: 11px;
+
+  line-height: 1.7;
+}
+
+.helpdesk-card-divider {
+  height: 1px;
+
+  margin:
+    auto 0 17px;
+
+  background:
+    rgba(72, 216, 240, .10);
+}
+
+/* =========================================================
+   CARD CONTACT
+========================================================= */
+
+.helpdesk-contact {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.helpdesk-contact > span {
+  overflow: hidden;
+
+  color:
+    rgba(185, 225, 232, .50);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.helpdesk-contact a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  flex: 0 0 auto;
+
+  color:
+    rgba(79, 220, 244, .62);
+
+  text-decoration: none;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  letter-spacing: .04em;
+
+  transition: .25s ease;
+}
+
+.helpdesk-contact a strong {
+  font-size: 13px;
+
+  font-weight: 400;
+}
+
+.helpdesk-contact a:hover {
+  color: #64eaff;
+}
+
+/* =========================================================
+   SUPPORT STRIP
+========================================================= */
+
+.helpdesk-support-strip {
+  min-height: 76px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 18px;
+
+  padding:
+    15px 20px;
+
+  border:
+    1px solid
+    rgba(73, 216, 239, .11);
+
+  border-radius: 14px;
+
+  background:
+    rgba(4, 34, 46, .37);
+}
+
+.support-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(78, 220, 244, .48);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  letter-spacing: .08em;
+
+  white-space: nowrap;
+}
+
+.support-status span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #56e6fb;
+
+  box-shadow:
+    0 0 11px
+    rgba(77, 225, 248, .7);
+}
+
+.support-message {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.support-message strong {
+  color:
+    rgba(219, 247, 251, .68);
+
+  font-size: 10px;
+
+  font-weight: 500;
+}
+
+.support-message span {
+  color:
+    rgba(147, 199, 210, .43);
+
+  font-size: 9px;
+}
+
+.support-guide-link {
+  margin-left: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    10px 14px;
+
+  border:
+    1px solid
+    rgba(73, 220, 244, .16);
+
+  border-radius: 9px;
+
+  color:
+    rgba(204, 242, 247, .58);
+
+  text-decoration: none;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: 7px;
+
+  transition: .25s ease;
+}
+
+.support-guide-link span {
+  font-size: 13px;
+}
+
+.support-guide-link:hover {
+  color: #05202a;
+
+  background: #59e6fc;
+
+  border-color: #59e6fc;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .helpdesk-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .helpdesk-section {
+    padding:
+      85px 14px 80px;
+  }
+
+  .helpdesk-heading {
+    margin-bottom: 38px;
+  }
+
+  .helpdesk-heading h2 {
+    font-size: 40px;
+  }
+
+  .helpdesk-heading p {
+    font-size: 13px;
+  }
+
+  .emergency-banner {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    padding: 17px;
+  }
+
+  .emergency-copy {
+    flex: 1;
+  }
+
+  .emergency-call {
+    width: 100%;
+
+    margin-left: 0;
+
+    flex-direction: row;
+
+    gap: 8px;
+  }
+
+  .helpdesk-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .helpdesk-card {
+    min-height: 320px;
+  }
+
+  .helpdesk-support-strip {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .support-guide-link {
+    width: 100%;
+
+    justify-content: center;
+
+    margin-left: 0;
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .helpdesk-eyebrow {
+    font-size: 7px;
+  }
+
+  .helpdesk-eyebrow span {
+    width: 24px;
+  }
+
+  .helpdesk-heading h2 {
+    font-size: 34px;
+  }
+
+  .emergency-copy strong {
+    font-size: 11px;
+  }
+
+}

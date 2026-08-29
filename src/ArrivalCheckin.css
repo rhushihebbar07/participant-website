@@ -1,0 +1,819 @@
+/* =========================================================
+   ARRIVAL & CHECK-IN
+========================================================= */
+
+.arrival-section {
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 100vh;
+
+  padding:
+    150px
+    clamp(20px, 5vw, 80px)
+    100px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(1, 12, 24, 0),
+      rgba(1, 17, 29, .48) 35%,
+      rgba(1, 8, 18, .72)
+    );
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+========================================================= */
+
+.arrival-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(100px);
+
+  opacity: .16;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(49, 225, 255, .9),
+      transparent 70%
+    );
+
+  animation:
+    arrivalGlow 10s ease-in-out infinite alternate;
+}
+
+.arrival-glow-one {
+  top: 15%;
+  left: -250px;
+}
+
+.arrival-glow-two {
+  right: -250px;
+  bottom: 10%;
+
+  animation-delay: 3s;
+}
+
+@keyframes arrivalGlow {
+  from {
+    transform: scale(.85);
+    opacity: .10;
+  }
+
+  to {
+    transform: scale(1.15);
+    opacity: .20;
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.arrival-container {
+  position: relative;
+
+  width: min(1450px, 100%);
+
+  margin: auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.arrival-heading {
+  max-width: 760px;
+
+  margin-bottom: 75px;
+}
+
+.arrival-eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+
+  color: #51eaff;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: .28em;
+
+  animation:
+    arrivalFade .8s ease both;
+}
+
+.arrival-line {
+  width: 38px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(76, 232, 255, .75)
+    );
+}
+
+.arrival-line:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(76, 232, 255, .75),
+      transparent
+    );
+}
+
+.arrival-heading h2 {
+  margin: 0;
+
+  font-size:
+    clamp(42px, 6vw, 82px);
+
+  line-height: .98;
+
+  letter-spacing: -.065em;
+
+  font-weight: 500;
+
+  color: #e9fcff;
+
+  animation:
+    arrivalFade 1s .1s ease both;
+}
+
+.arrival-heading h2 span {
+  color: #50eaff;
+
+  text-shadow:
+    0 0 30px rgba(56, 224, 255, .20);
+}
+
+.arrival-heading p {
+  max-width: 580px;
+
+  margin:
+    27px
+    0
+    0;
+
+  color:
+    rgba(189, 220, 227, .67);
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  animation:
+    arrivalFade 1s .2s ease both;
+}
+
+@keyframes arrivalFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   FLOW
+========================================================= */
+
+.arrival-flow {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+.flow-line {
+  position: absolute;
+
+  top: 38px;
+
+  left: 10%;
+
+  right: 10%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(61, 225, 255, .30),
+      rgba(61, 225, 255, .30),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   STEP CARD
+========================================================= */
+
+.arrival-card {
+  position: relative;
+
+  min-height: 300px;
+
+  padding:
+    26px
+    24px
+    28px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(77, 220, 255, .18);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7, 52, 72, .54),
+      rgba(2, 21, 37, .73)
+    );
+
+  box-shadow:
+    inset 0 1px
+      rgba(183, 248, 255, .07),
+    inset 0 -1px
+      rgba(30, 205, 240, .08),
+    0 20px 55px
+      rgba(0, 0, 0, .20);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(135%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(135%);
+
+  transition:
+    transform .5s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+
+  animation:
+    cardReveal .8s ease both;
+}
+
+.arrival-card:nth-child(2) {
+  animation-delay: .08s;
+}
+
+.arrival-card:nth-child(3) {
+  animation-delay: .16s;
+}
+
+.arrival-card:nth-child(4) {
+  animation-delay: .24s;
+}
+
+.arrival-card:nth-child(5) {
+  animation-delay: .32s;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform:
+      translateY(35px)
+      scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+.arrival-card:hover {
+  transform:
+    translateY(-9px);
+
+  border-color:
+    rgba(73, 229, 255, .46);
+
+  box-shadow:
+    inset 0 1px
+      rgba(183, 248, 255, .12),
+    0 25px 70px
+      rgba(0, 0, 0, .30),
+    0 0 35px
+      rgba(28, 211, 255, .08);
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.card-number {
+  position: absolute;
+
+  top: 20px;
+  right: 22px;
+
+  color:
+    rgba(120, 234, 255, .22);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 12px;
+
+  letter-spacing: .1em;
+}
+
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.card-icon {
+  position: relative;
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 75px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(70, 226, 255, .35);
+
+  border-radius: 15px;
+
+  color: #68edff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(57, 216, 245, .13),
+      rgba(5, 70, 99, .16)
+    );
+
+  box-shadow:
+    0 0 25px
+      rgba(40, 214, 255, .07),
+    inset 0 1px
+      rgba(255, 255, 255, .10);
+
+  font-size: 20px;
+
+  transition:
+    transform .45s ease,
+    box-shadow .45s ease;
+}
+
+.arrival-card:hover .card-icon {
+  transform:
+    translateY(-4px)
+    rotate(-3deg);
+
+  box-shadow:
+    0 0 30px
+      rgba(40, 214, 255, .20),
+    inset 0 1px
+      rgba(255, 255, 255, .14);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.card-content h3 {
+  margin: 0 0 12px;
+
+  color: #e7fbff;
+
+  font-size: 19px;
+
+  line-height: 1.25;
+
+  letter-spacing: -.025em;
+}
+
+.card-content p {
+  margin: 0;
+
+  color:
+    rgba(177, 213, 220, .62);
+
+  font-size: 12px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   CARD WATER LIGHT
+========================================================= */
+
+.card-water-glow {
+  position: absolute;
+
+  width: 170px;
+  height: 170px;
+
+  right: -100px;
+  bottom: -110px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(42, 217, 255, .17),
+      transparent 70%
+    );
+
+  filter: blur(20px);
+
+  transition:
+    transform .6s ease,
+    opacity .6s ease;
+}
+
+.arrival-card:hover .card-water-glow {
+  transform: scale(1.5);
+
+  opacity: 1.4;
+}
+
+
+/* =========================================================
+   INFORMATION CARDS
+========================================================= */
+
+.arrival-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 18px;
+
+  margin-top: 18px;
+}
+
+.arrival-info-card {
+  min-height: 200px;
+
+  padding: 27px;
+
+  border:
+    1px solid
+    rgba(74, 217, 248, .12);
+
+  border-radius: 18px;
+
+  background:
+    rgba(2, 25, 40, .50);
+
+  backdrop-filter:
+    blur(15px);
+
+  transition:
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+.arrival-info-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(74, 217, 248, .30);
+}
+
+.arrival-info-card.highlight {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 77, 99, .40),
+      rgba(2, 29, 44, .58)
+    );
+
+  border-color:
+    rgba(73, 228, 255, .25);
+}
+
+.info-label {
+  color:
+    rgba(69, 225, 255, .62);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: .2em;
+}
+
+.arrival-info-card h3 {
+  margin:
+    18px
+    0
+    10px;
+
+  color: #e8fcff;
+
+  font-size: 18px;
+}
+
+.arrival-info-card p {
+  margin: 0;
+
+  color:
+    rgba(175, 211, 219, .60);
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+========================================================= */
+
+.arrival-bottom {
+  margin-top: 35px;
+
+  padding:
+    23px
+    27px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  border-top:
+    1px solid
+    rgba(70, 219, 247, .13);
+
+  border-bottom:
+    1px solid
+    rgba(70, 219, 247, .08);
+}
+
+.bottom-status {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color:
+    rgba(73, 224, 255, .55);
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: 8px;
+
+  letter-spacing: .2em;
+}
+
+.arrival-bottom strong {
+  display: block;
+
+  color:
+    rgba(226, 249, 252, .82);
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.arrival-cta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  padding:
+    13px
+    19px;
+
+  border:
+    1px solid
+    rgba(61, 224, 255, .30);
+
+  border-radius: 30px;
+
+  color: #73efff;
+
+  background:
+    rgba(37, 201, 231, .07);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.arrival-cta span {
+  font-size: 20px;
+
+  transition:
+    transform .3s ease;
+}
+
+.arrival-cta:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(37, 201, 231, .13);
+
+  box-shadow:
+    0 0 30px
+      rgba(37, 211, 255, .10);
+}
+
+.arrival-cta:hover span {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .arrival-flow {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .flow-line {
+    display: none;
+  }
+
+  .arrival-info-grid {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .arrival-section {
+    padding:
+      100px
+      16px
+      70px;
+  }
+
+  .arrival-heading {
+    margin-bottom: 45px;
+  }
+
+  .arrival-heading h2 {
+    font-size:
+      clamp(40px, 12vw, 60px);
+  }
+
+  .arrival-heading p {
+    font-size: 13px;
+  }
+
+  .arrival-flow {
+    grid-template-columns:
+      1fr;
+  }
+
+  .arrival-card {
+    min-height: 250px;
+
+    padding: 22px;
+  }
+
+  .card-icon {
+    margin-bottom: 55px;
+  }
+
+  .arrival-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .arrival-cta {
+    width: 100%;
+
+    justify-content: center;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .arrival-section {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .arrival-eyebrow {
+    font-size: 8px;
+
+    letter-spacing: .20em;
+  }
+
+  .arrival-heading h2 {
+    font-size: 39px;
+  }
+
+  .arrival-card {
+    min-height: 235px;
+  }
+
+  .card-icon {
+    margin-bottom: 45px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .arrival-section *,
+  .arrival-section *::before,
+  .arrival-section *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}
